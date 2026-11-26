@@ -320,6 +320,7 @@ html[data-style][data-mode="dark"]{color-scheme:dark}
 html[data-style] .nav .bar{background:var(--surface);border-color:var(--border);color:var(--text)}
 html[data-style] .brand,html[data-style] .brand:hover{color:var(--text)}
 html[data-style] .exp a{color:var(--accent)}
+html[data-style] a.back-port{display:inline-flex;align-items:center;width:max-content;margin:4px 0 14px;padding:10px 16px;border-radius:999px;background:var(--primary);color:var(--primary-contrast);font-weight:700;text-decoration:none}
 html[data-style] .mark{background:var(--primary);color:var(--primary-contrast)}
 html[data-style] .lang-btn,html[data-style] .mode-btn{background:var(--text);color:var(--bg);border-color:var(--text)}
 html[data-style] .lang-btn:hover,html[data-style] .mode-btn:hover{background:var(--primary);color:var(--primary-contrast);border-color:var(--primary)}
@@ -339,6 +340,10 @@ html[data-mode="dark"]:not([data-style]){color-scheme:dark;
   --sand:#3a3228;--mustard:#e2b45a;--mustard-l:#3a3018;
   --shadow:0 1px 0 rgba(255,255,255,.04) inset,0 1px 2px rgba(0,0,0,.35),0 8px 24px -12px rgba(0,0,0,.55);
   --shadow-h:0 1px 0 rgba(255,255,255,.05) inset,0 2px 4px rgba(0,0,0,.35),0 22px 40px -18px rgba(0,0,0,.7)}
+html[data-mode="dark"]:not([data-style]) .nav .bar{background:rgba(28,24,20,.94);border-color:#8d7b68}
+html[data-mode="dark"]:not([data-style]) .brand,html[data-mode="dark"]:not([data-style]) .brand:hover,html[data-mode="dark"]:not([data-style]) .hero h1{color:#f6f0e6}
+html[data-mode="dark"]:not([data-style]) .nav ul a{color:#d4c4b0}
+html[data-mode="dark"]:not([data-style]) .nav ul a:hover{color:#f6f0e6;background:#3a3228}
 html[data-mode="dark"]:not([data-style]) body::before{background:none}
 html[data-mode="dark"]:not([data-style]) body::after{mix-blend-mode:overlay;opacity:.14}
 html[data-mode="dark"]:not([data-style]) .hero{background:linear-gradient(160deg,#262019 0%,#2e271f 100%)}

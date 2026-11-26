@@ -16,6 +16,7 @@ ThemeEngine.register("synth", function(root){
     view.textContent = "";
     view.appendChild(E.h("p", "syn-kicker", E.isAr() ? "اختر المرحلة" : "SELECT LEVEL"));
     view.appendChild(E.h("h1", "", E.t(S.name)));
+    view.appendChild(E.h("p", "", (E.isAr() ? "الشهادات " : "Certificates ") + E.count()));
     var grid = E.h("div", "syn-levels");
     levels.forEach(function(L){
       var b = E.h("button", "syn-level");
@@ -63,6 +64,7 @@ ThemeEngine.register("synth", function(root){
     } else if (stage === "skills"){
       S.skills.forEach(function(g){ view.appendChild(E.h("p", "", E.t(g) + ": " + g.items.join(", "))); });
     } else if (stage === "certs"){
+      if (E.page === "certs") view.appendChild(E.backLink("syn-go"));
       view.appendChild(E.h("h1", "", E.isAr() ? "مراحل الأرشيف" : "ARCHIVE STAGES"));
       view.appendChild(E.h("p", "", String(E.count())));
       if (E.page !== "certs"){

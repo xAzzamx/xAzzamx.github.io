@@ -3,8 +3,7 @@ ThemeEngine.register("aurora", function(root){
   if (E.page === "certs"){
     root.appendChild(E.h("p", "au-kicker", E.isAr() ? "الأرشيف" : "Archive"));
     root.appendChild(E.h("h1", "", E.isAr() ? "صفوف الشهادات" : "Certificate rows"));
-    var back = E.h("a", "au-link"); back.href = "index.html"; back.appendChild(E.bi("Back to the story", "العودة إلى القصة"));
-    root.appendChild(back);
+    root.appendChild(E.backLink());
     E.rails(root, {rowClass:"au-row", railClass:"au-rail", cardClass:"au-card"});
     return;
   }

@@ -14,7 +14,7 @@ html[data-style="terminal"][data-mode="dark"]{
 html[data-style="terminal"] body{background:var(--bg);color:var(--text);font-family:"IBM Plex Mono",ui-monospace,monospace}
 html[data-style="terminal"][lang=ar] body{font-family:var(--ar),"IBM Plex Mono",sans-serif}
 html[data-style="terminal"] .nav .bar{border-radius:0;background:var(--surface);border-color:var(--border);box-shadow:none}
-html[data-style="terminal"] .style-btn,html[data-style="terminal"] .lang-btn,html[data-style="terminal"] .mode-btn{border-radius:0}
+html[data-style="terminal"] .style-btn,html[data-style="terminal"] .lang-btn,html[data-style="terminal"] .mode-btn,html[data-style="terminal"] a.back-port{border-radius:0}
 html[data-style="terminal"] .exp{max-width:980px;margin:18px auto 40px;padding:0 16px}
 .term-cmds{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
 .term-cmd{font:600 .82rem inherit;background:var(--surface);color:var(--accent);border:1px solid var(--border);padding:8px 10px;cursor:pointer}

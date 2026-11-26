@@ -36,6 +36,7 @@ ThemeEngine.register("blueprint", function(root){
       main.appendChild(E.h("p", "bp-call", "B  " + E.t(S.lead)));
       main.appendChild(E.h("p", "bp-call", "C  STEP " + S.step.n + "  " + E.t(S.step)));
       main.appendChild(E.h("p", "bp-call", "D  " + E.t(S.status)));
+      main.appendChild(E.h("p", "bp-call", (E.isAr() ? "شهادات " : "Certificates ") + E.count()));
     } else if (cur === "edu"){
       main.appendChild(E.h("h1", "", E.t(S.edu.title)));
       main.appendChild(E.h("p", "bp-call", E.t(S.edu.when) + "  " + E.t(S.edu.where)));
@@ -53,6 +54,7 @@ ThemeEngine.register("blueprint", function(root){
     } else if (cur === "skl"){
       S.skills.forEach(function(g){ main.appendChild(E.h("p", "bp-call", E.t(g) + "  " + g.items.join(" / "))); });
     } else if (cur === "certs"){
+      if (E.page === "certs") main.appendChild(E.backLink());
       main.appendChild(E.h("h1", "", E.isAr() ? "فهرس الشهادات" : "CERTIFICATE INDEX"));
       main.appendChild(E.h("p", "", String(E.count())));
       if (E.page !== "certs"){
