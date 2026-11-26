@@ -31,6 +31,8 @@
     var styleMenuEl = document.getElementById("style-menu");
     if (styleBtnEl) styleBtnEl.setAttribute("aria-label", lang === "ar" ? "التصاميم" : "Styles");
     if (styleMenuEl) styleMenuEl.setAttribute("aria-label", lang === "ar" ? "التصاميم" : "Styles");
+    var modeBtnEl = document.getElementById("mode-btn");
+    if (modeBtnEl) modeBtnEl.setAttribute("aria-label", modeLabel(root.getAttribute("data-mode") === "dark" ? "dark" : "light"));
     if (save) { try { localStorage.setItem("lang", lang); } catch(e){} }
     langListeners.forEach(function(f){ f(); });
   }
@@ -48,14 +50,30 @@
   // Style switcher. Classic is the absence of data-style, so the current design stays untouched.
   var STYLE_OK = {classic:1, terminal:1, aurora:1, brutal:1, synth:1, editorial:1, blueprint:1, bento:1};
   var THEME_JS = {terminal:1, aurora:1, brutal:1, synth:1, editorial:1, blueprint:1, bento:1};
-  var ASSET = "v=20261127";
-  var THEME_COLOR = {classic:"#f5eee3", terminal:"#04110a", aurora:"#1a1030", brutal:"#fff4c8", synth:"#140018", editorial:"#f3efe6", blueprint:"#0c3d86", bento:"#12151c"};
+  var ASSET = "v=20261128";
+  var BOOT_BG = {
+    terminal:{light:"#f0f8f1",dark:"#061308"},
+    aurora:{light:"#e5eaff",dark:"#100e24"},
+    brutal:{light:"#f9f5e6",dark:"#13120c"},
+    synth:{light:"#fbf2fb",dark:"#17091a"},
+    editorial:{light:"#f8f1e5",dark:"#18100a"},
+    blueprint:{light:"#ebf3fc",dark:"#0e2440"},
+    bento:{light:"#f1f6fa",dark:"#0d1218"}
+  };
+  function bootColor(id){
+    var mode = root.getAttribute("data-mode") === "dark" ? "dark" : "light";
+    if (!id || id === "classic") return mode === "dark" ? "#1c1814" : "#f5eee3";
+    return (BOOT_BG[id] && BOOT_BG[id][mode]) || "#111";
+  }
+  function bootRule(id){
+    return 'html[data-style="' + id + '"] body{background:' + bootColor(id) + '}html[data-style] main,html[data-style] footer,html[data-style] #menu,html[data-style] .menu-btn{display:none!important}';
+  }
   var styleBtn = document.getElementById("style-btn");
   var styleMenu = document.getElementById("style-menu");
   var styleSwitch = document.getElementById("style-switch");
   function themeMeta(id){
     var meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute("content", THEME_COLOR[id] || THEME_COLOR.classic);
+    if (meta) meta.setAttribute("content", bootColor(id));
   }
   function markStyle(id){
     if (!styleMenu) return;
@@ -120,7 +138,7 @@
         boot.id = "theme-boot";
         document.head.appendChild(boot);
       }
-      boot.textContent = 'html[data-style="' + id + '"] body{background:' + THEME_COLOR[id] + '}html[data-style] main,html[data-style] footer,html[data-style] #menu,html[data-style] .menu-btn{display:none!important}';
+      boot.textContent = bootRule(id);
       loadThemeJs(id);
     }
     themeMeta(id);
@@ -345,6 +363,36 @@
     var next = form.querySelector('input[name="_next"]');
     if (next && /^https?:/.test(location.protocol)) next.value = location.href.split("#")[0].split("?")[0] + "?sent=1#contact";
     if (/[?&]sent=1/.test(location.search)) document.getElementById("thanks").classList.add("show");
+  }
+
+  function modeLabel(mode){
+    var toDark = mode !== "dark";
+    if (isAr()) return toDark ? "التبديل إلى الوضع الداكن" : "التبديل إلى الوضع الفاتح";
+    return toDark ? "Switch to dark mode" : "Switch to light mode";
+  }
+  function applyMode(mode, save){
+    if (mode !== "dark" && mode !== "light") mode = "light";
+    root.setAttribute("data-mode", mode);
+    var mb = document.getElementById("mode-btn");
+    if (mb) mb.setAttribute("aria-label", modeLabel(mode));
+    if (save) { try { localStorage.setItem("color", mode); } catch (e) {} }
+    var id = root.getAttribute("data-style");
+    themeMeta(id || "classic");
+    var boot = document.getElementById("theme-boot");
+    if (boot && id) boot.textContent = bootRule(id);
+  }
+  var modeBtn = document.getElementById("mode-btn");
+  if (modeBtn) modeBtn.addEventListener("click", function(){
+    applyMode(root.getAttribute("data-mode") === "dark" ? "light" : "dark", true);
+  });
+  if (window.matchMedia){
+    var scheme = window.matchMedia("(prefers-color-scheme: dark)");
+    var onScheme = function(){
+      try { if (localStorage.getItem("color")) return; } catch (e) {}
+      applyMode(scheme.matches ? "dark" : "light", false);
+    };
+    if (scheme.addEventListener) scheme.addEventListener("change", onScheme);
+    else if (scheme.addListener) scheme.addListener(onScheme);
   }
 
   window.Portfolio = { onLang: function(fn){ langListeners.push(fn); } };

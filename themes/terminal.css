@@ -1,22 +1,37 @@
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap");
-html[data-style="terminal"] body{background:#04110a;color:#c8ffd4;font-family:"IBM Plex Mono",ui-monospace,monospace}
+/* Terminal. Analogous green, hue 150. One phosphor accent.
+   Neutrals are an OKLCH green ramp. https://coolors.co/061308-0f6a31-6fd087-e9f6eb-f0f8f1 */
+html[data-style="terminal"]{
+  --n-50:#f0f8f1;--n-100:#e2efe4;--n-200:#caddcd;--n-300:#a6bfaa;--n-400:#83a188;
+  --n-500:#587c5f;--n-600:#3c5f43;--n-700:#29452f;--n-800:#15291a;--n-900:#07150a;
+  --bg:#f0f8f1;--surface:#fbfffb;--surface-2:#ddeddf;--text:#102515;--text-muted:#384e3c;
+  --border:#3d5342;--primary:#0f6a31;--primary-contrast:#ffffff;--accent:#0f6a31;
+  --success:#0a553d;--warning:#3e4f1a}
+html[data-style="terminal"][data-mode="dark"]{
+  --bg:#061308;--surface:#0e1f12;--surface-2:#1a2e1e;--text:#e9f6eb;--text-muted:#afc4b2;
+  --border:#587c5f;--primary:#6fd087;--primary-contrast:#021c09;--accent:#6fd087;
+  --success:#69d6aa;--warning:#c2cd6f}
+html[data-style="terminal"] body{background:var(--bg);color:var(--text);font-family:"IBM Plex Mono",ui-monospace,monospace}
 html[data-style="terminal"][lang=ar] body{font-family:var(--ar),"IBM Plex Mono",sans-serif}
-html[data-style="terminal"] .nav .bar{border-radius:0;background:#07140e;border-color:#1f8a3b;box-shadow:none}
-html[data-style="terminal"] .style-btn,html[data-style="terminal"] .lang-btn{border-radius:0}
+html[data-style="terminal"] .nav .bar{border-radius:0;background:var(--surface);border-color:var(--border);box-shadow:none}
+html[data-style="terminal"] .style-btn,html[data-style="terminal"] .lang-btn,html[data-style="terminal"] .mode-btn{border-radius:0}
 html[data-style="terminal"] .exp{max-width:980px;margin:18px auto 40px;padding:0 16px}
 .term-cmds{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
-.term-cmd{font:600 .82rem inherit;background:#07140e;color:#39ff78;border:1px solid #1f8a3b;padding:8px 10px;cursor:pointer}
-.term-screen{border:1px solid #1f8a3b;background:#07140e;min-height:70vh;padding:16px 16px 28px}
-.term-prompt{color:#39ff78;margin:0 0 12px}
-.term-line{margin:0 0 8px;white-space:pre-wrap}
-.term-proj{border-top:1px dashed #1f8a3b;padding:12px 0}
+.term-cmd{font:600 .82rem inherit;background:var(--surface);color:var(--accent);border:1px solid var(--border);padding:8px 10px;cursor:pointer}
+.term-screen{border:1px solid var(--border);background:var(--surface);color:var(--text);min-height:70vh;padding:16px 16px 28px}
+.term-prompt{color:var(--accent);margin:0 0 12px}
+.term-line{margin:0 0 8px;white-space:pre-wrap;color:var(--text)}
+.term-proj{border-top:1px dashed var(--border);padding:12px 0}
 .term-proj img{max-width:100%;max-height:220px;object-fit:cover}
 .term-row{margin:14px 0}
 .term-rail,.term-row .rail{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px}
-.term-card{flex:0 0 160px;background:#04110a;color:#c8ffd4;border:1px solid #1f8a3b;padding:0;text-align:start;cursor:pointer}
+.term-card{flex:0 0 160px;background:var(--bg);color:var(--text);border:1px solid var(--border);padding:0;text-align:start;cursor:pointer}
 .term-card img{width:100%;height:96px;object-fit:cover;background:#fff}
-.term-card span{display:block;padding:6px 8px;font-size:.75rem}
-.term-go{color:#39ff78}
+.term-card span{display:block;padding:6px 8px;font-size:.75rem;color:var(--text)}
+.term-go{color:var(--accent)}
 .term-screen form{display:grid;gap:8px;max-width:420px}
-.term-screen input,.term-screen textarea{background:#04110a;color:#c8ffd4;border:1px solid #1f8a3b;padding:8px;font:inherit}
-html[data-style="terminal"] .xv-info{background:#07140e;color:#c8ffd4}
+.term-screen input,.term-screen textarea{background:var(--bg);color:var(--text);border:1px solid var(--border);padding:8px;font:inherit}
+.term-screen input::placeholder,.term-screen textarea::placeholder{color:var(--text-muted)}
+.term-screen button,.term-screen form button{background:var(--primary);color:var(--primary-contrast);border:1px solid var(--primary);padding:8px 12px;font:inherit;font-weight:650;cursor:pointer}
+html[data-style="terminal"] .xv-info{background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:0}
+html[data-style="terminal"] .xv-x{border-radius:0}
