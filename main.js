@@ -46,10 +46,10 @@
   document.querySelectorAll(".year").forEach(function(y){ y.textContent = new Date().getFullYear(); });
 
   // Style switcher. Classic is the absence of data-style, so the current design stays untouched.
-  var STYLE_OK = {classic:1, terminal:1, aurora:1, brutal:1, synth:1, editorial:1, blueprint:1};
-  var THEME_JS = {terminal:1, aurora:1, synth:1};
-  var ASSET = "v=20261126";
-  var THEME_COLOR = {classic:"#f5eee3", terminal:"#04110a", aurora:"#1a1030", brutal:"#fff4c8", synth:"#140018", editorial:"#f3efe6", blueprint:"#0c3d86"};
+  var STYLE_OK = {classic:1, terminal:1, aurora:1, brutal:1, synth:1, editorial:1, blueprint:1, bento:1};
+  var THEME_JS = {terminal:1, aurora:1, brutal:1, synth:1, editorial:1, blueprint:1, bento:1};
+  var ASSET = "v=20261127";
+  var THEME_COLOR = {classic:"#f5eee3", terminal:"#04110a", aurora:"#1a1030", brutal:"#fff4c8", synth:"#140018", editorial:"#f3efe6", blueprint:"#0c3d86", bento:"#12151c"};
   var styleBtn = document.getElementById("style-btn");
   var styleMenu = document.getElementById("style-menu");
   var styleSwitch = document.getElementById("style-switch");
@@ -67,6 +67,7 @@
     if (styleBtn) styleBtn.classList.toggle("on", id !== "classic");
   }
   function clearThemeFx(){
+    themeLoadGen++;
     window.__themeToken = null;
     if (typeof window.__themeCleanup === "function"){
       try { window.__themeCleanup(); } catch (err) {}
@@ -86,13 +87,21 @@
     }
     if (link.getAttribute("href") !== href) link.setAttribute("href", href);
   }
+  var themeLoadGen = 0;
   function loadThemeJs(id){
     if (!THEME_JS[id]) return;
-    var sc = document.createElement("script");
-    sc.src = "themes/" + id + ".js?" + ASSET;
-    sc.async = true;
-    sc.setAttribute("data-theme", id);
-    document.body.appendChild(sc);
+    var gen = ++themeLoadGen;
+    var urls = ["themes/fields.js","themes/content.js","themes/engine.js","themes/" + id + ".js"];
+    function step(i){
+      if (gen !== themeLoadGen) return;
+      if (i >= urls.length) return;
+      var sc = document.createElement("script");
+      sc.src = urls[i] + "?" + ASSET;
+      sc.setAttribute("data-theme", id);
+      sc.onload = function(){ step(i + 1); };
+      document.body.appendChild(sc);
+    }
+    step(0);
   }
   function applyStyle(id, save){
     if (!STYLE_OK[id]) id = "classic";
@@ -111,7 +120,7 @@
         boot.id = "theme-boot";
         document.head.appendChild(boot);
       }
-      boot.textContent = 'html[data-style="' + id + '"] body{background:' + THEME_COLOR[id] + "}";
+      boot.textContent = 'html[data-style="' + id + '"] body{background:' + THEME_COLOR[id] + '}html[data-style] main,html[data-style] footer,html[data-style] #menu,html[data-style] .menu-btn{display:none!important}';
       loadThemeJs(id);
     }
     themeMeta(id);

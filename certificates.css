@@ -36,6 +36,31 @@ html[lang=ar] .cert-group h2{font-family:var(--ar-head)}
 html[dir=rtl] .cert-card:hover{transform:translateY(-4px) rotate(.35deg)}
 .cert-empty{margin:8px 0 0;color:var(--mut);font-weight:600}
 .cert-lb p{display:flex;flex-wrap:wrap;gap:8px 14px;justify-content:center;align-items:center}
+.group-toggle{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 8px}
+.group-toggle button{font:600 .9rem inherit;border-radius:999px;border:1.5px solid var(--line2);background:var(--paper);color:var(--ink2);padding:8px 14px;cursor:pointer}
+.group-toggle button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.cert-row{margin:8px 0 18px}
+.cert-row h2{display:flex;align-items:baseline;gap:10px;font-size:1.25rem;margin:0 0 10px}
+.cert-row h2 .n{font-family:var(--sans);font-size:.78rem;font-weight:700;color:var(--clay-d);background:var(--clay-l);border-radius:999px;padding:2px 8px}
+.rail{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:2px 2px 12px;scrollbar-width:thin}
+.rail .cert-card{flex:0 0 220px;scroll-snap-align:start}
+.cert-lb{align-items:center}
+.lb-layout{display:flex;flex-direction:row;align-items:stretch;gap:16px;width:min(1100px,94vw);max-width:94vw;max-height:86vh;min-width:0}
+.cert-lb .lb-layout img{flex:1 1 0;min-width:0;width:0;max-width:100%;height:auto;max-height:86vh;object-fit:contain;background:#fff;margin:0}
+.cert-info{flex:0 0 300px;width:300px;max-width:34vw;overflow:auto;background:var(--paper);color:var(--ink);border-radius:16px;padding:18px 16px;text-align:start}
+.cert-info h3{font-size:1.15rem;margin:0 0 8px}
+.cert-info .desc{margin:0 0 12px;color:var(--ink2);font-size:.95rem}
+.cert-info dl{margin:0}
+.cert-info dl div{margin:0 0 8px}
+.cert-info dt{font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}
+html[lang=ar] .cert-info dt{letter-spacing:0;text-transform:none;font-size:.82rem}
+.cert-info dd{margin:0;font-weight:600}
+.cert-info .file{display:inline-flex;margin-top:8px;font-weight:700;border-bottom:1px solid currentColor}
+@media (max-width:800px){
+ .lb-layout{flex-direction:column;max-height:none;width:min(560px,94vw);overflow:auto;max-height:88vh}
+ .cert-info{flex:none;width:100%;max-width:none;max-height:none}
+ .cert-lb .lb-layout img{width:100%;max-height:48vh}
+}
 .cert-lb p strong{font-family:var(--serif);font-weight:600}
 html[lang=ar] .cert-lb p strong{font-family:var(--ar-head)}
 .cert-lb p a{color:#fff;font-weight:700;border-bottom:1px solid rgba(255,255,255,.6)}

@@ -1,64 +1,95 @@
-(function(){
-  var NAME = "terminal";
-  if (document.documentElement.getAttribute("data-style") !== NAME) return;
-  var token = {};
-  window.__themeToken = token;
-  function alive(){ return window.__themeToken === token && document.documentElement.getAttribute("data-style") === NAME; }
-  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var c = document.createElement("canvas");
-  c.className = "theme-fx";
-  c.setAttribute("data-theme-root", "");
-  c.setAttribute("aria-hidden", "true");
-  document.body.prepend(c);
-  var ctx = c.getContext("2d");
-  var drops = [];
-  var fs = 16;
-  var timer = 0;
-  var chars = "01ABCDEF#$%&*<>{}[]/\\";
-  function size(){
-    var dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-    var w = window.innerWidth;
-    var h = window.innerHeight;
-    c.width = Math.floor(w * dpr);
-    c.height = Math.floor(h * dpr);
-    c.style.width = w + "px";
-    c.style.height = h + "px";
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    var cols = Math.ceil(w / fs);
-    drops = [];
-    for (var i = 0; i < cols; i++) drops[i] = Math.random() * (h / fs);
-  }
-  function draw(){
-    if (!alive()){ clearInterval(timer); return; }
-    var w = window.innerWidth;
-    var h = window.innerHeight;
-    ctx.fillStyle = "rgba(4,17,10,0.22)";
-    ctx.fillRect(0, 0, w, h);
-    ctx.fillStyle = "#37f07a";
-    ctx.font = fs + "px monospace";
-    for (var i = 0; i < drops.length; i++){
-      var ch = chars.charAt(Math.floor(Math.random() * chars.length));
-      ctx.globalAlpha = 0.35 + Math.random() * 0.65;
-      ctx.fillText(ch, i * fs, drops[i] * fs);
-      if (!reduce){
-        if (drops[i] * fs > h && Math.random() > 0.975) drops[i] = 0;
-        drops[i] += 1;
-      }
+ThemeEngine.register("terminal", function(root){
+  var E = ThemeEngine, S = E.site, reduce = E.reduce;
+  var cmds = [
+    ["whoami", {en:"whoami", ar:"من أنا"}],
+    ["about", {en:"about", ar:"نبذة"}],
+    ["education", {en:"education", ar:"تعليم"}],
+    ["experience", {en:"experience", ar:"خبرة"}],
+    ["projects", {en:"projects", ar:"مشاريع"}],
+    ["skills", {en:"skills", ar:"مهارات"}],
+    ["certificates", {en:"certificates", ar:"شهادات"}],
+    ["contact", {en:"contact", ar:"تواصل"}]
+  ];
+  var cmd = E.page === "certs" ? "certificates" : "whoami";
+  var bar = E.h("nav", "term-cmds");
+  var screen = E.h("div", "term-screen");
+  var prompt = E.h("p", "term-prompt");
+  var out = E.h("div", "term-out");
+  function setPrompt(){
+    prompt.textContent = "";
+    prompt.appendChild(document.createTextNode("azzam@portfolio:~$ "));
+    var typed = E.h("span", "term-typed", cmd);
+    prompt.appendChild(typed);
+    if (!reduce){
+      typed.textContent = "";
+      var i = 0;
+      var timer = setInterval(function(){
+        i++; typed.textContent = cmd.slice(0, i);
+        if (i >= cmd.length) clearInterval(timer);
+      }, 28);
     }
-    ctx.globalAlpha = 1;
   }
-  function onResize(){ if (alive()) size(); }
-  size();
-  draw();
-  if (!reduce) timer = setInterval(draw, 90);
-  window.addEventListener("resize", onResize);
-  document.addEventListener("visibilitychange", function(){
-    if (!alive()) return;
-    if (document.hidden){ clearInterval(timer); timer = 0; }
-    else if (!reduce && !timer) timer = setInterval(draw, 90);
+  function line(text){ return E.h("p", "term-line", text); }
+  function show(){
+    out.textContent = "";
+    setPrompt();
+    if (cmd === "whoami"){
+      out.appendChild(line(E.t(S.name)));
+      out.appendChild(line(E.t(S.role)));
+      out.appendChild(line(E.t(S.lead)));
+      out.appendChild(line(E.t(S.status) + "  |  STEP " + S.step.n));
+    } else if (cmd === "about"){
+      out.appendChild(E.h("h2", "", E.t(S.aboutTitle)));
+      S.about.forEach(function(p){ out.appendChild(line(E.t(p))); });
+    } else if (cmd === "education"){
+      out.appendChild(line(E.t(S.edu.when) + "  " + E.t(S.edu.title)));
+      out.appendChild(line(E.t(S.edu.where)));
+      out.appendChild(line(E.t(S.edu.note)));
+      out.appendChild(line(E.t(S.msc) + "  " + E.t(S.msc.where)));
+      S.msc.pills.forEach(function(p){ out.appendChild(line("  " + E.t(p))); });
+    } else if (cmd === "experience"){
+      out.appendChild(line(E.t(S.job.when) + "  " + E.t(S.job.title)));
+      out.appendChild(line(E.t(S.job.where)));
+      S.job.bullets.forEach(function(b){ out.appendChild(line("• " + E.t(b))); });
+      out.appendChild(line("SUSTAIN 2026  " + E.t(S.research)));
+    } else if (cmd === "projects"){
+      S.projects.forEach(function(p){
+        var art = E.h("article", "term-proj");
+        if (p.img){ var im = E.h("img"); im.src = p.img; im.alt = ""; art.appendChild(im); }
+        art.appendChild(E.h("h2", "", E.t(p.title)));
+        art.appendChild(line(E.t(p.body)));
+        art.appendChild(line(E.t(p.role)));
+        out.appendChild(art);
+      });
+    } else if (cmd === "skills"){
+      S.skills.forEach(function(g){
+        out.appendChild(E.h("h2", "", E.t(g)));
+        out.appendChild(line(g.items.join("   ")));
+      });
+    } else if (cmd === "certificates"){
+      out.appendChild(line((E.isAr() ? "عدد الشهادات " : "certificates ") + E.count()));
+      var link = E.h("a", "term-go");
+      link.href = "certificates.html";
+      link.appendChild(E.bi("Open the full archive", "افتح الأرشيف كاملًا"));
+      if (E.page !== "certs") out.appendChild(link);
+      E.rails(out, {rowClass:"term-row", railClass:"term-rail", cardClass:"term-card"});
+    } else if (cmd === "contact"){
+      out.appendChild(line(S.links.email));
+      out.appendChild(line("github.com/xAzzamx"));
+      out.appendChild(line(E.t(S.contactNote)));
+      out.appendChild(E.form());
+    }
+  }
+  cmds.forEach(function(c){
+    var b = E.h("button", "term-cmd");
+    b.type = "button";
+    b.appendChild(E.bi(c[1].en, c[1].ar));
+    b.addEventListener("click", function(){ cmd = c[0]; show(); });
+    bar.appendChild(b);
   });
-  window.__themeCleanup = function(){
-    clearInterval(timer);
-    window.removeEventListener("resize", onResize);
-  };
-})();
+  root.appendChild(bar);
+  screen.appendChild(prompt);
+  screen.appendChild(out);
+  root.appendChild(screen);
+  show();
+});
