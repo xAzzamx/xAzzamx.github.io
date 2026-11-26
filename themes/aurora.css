@@ -1,30 +1,78 @@
 @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&family=Syne:wght@700;800&display=swap");
-html[data-style="aurora"] body{background:#1a1030;color:#241433;font-family:Outfit,sans-serif;background-image:radial-gradient(800px 500px at 10% 0%,#ff8ec8,transparent 55%),radial-gradient(700px 500px at 100% 10%,#7aa2ff,transparent 50%),radial-gradient(600px 500px at 70% 100%,#67f0d4,transparent 50%)}
+/* Aurora Glass. Analogous cool hues only: teal, blue, violet.
+   One UI accent (violet). Blobs are the same three hues.
+   https://coolors.co/100e24-49379f-8968f4-00abed-2bd2c2 */
+html[data-style="aurora"]{
+  --n-50:#f3f4fd;--n-100:#e8eaf9;--n-200:#d3d6ec;--n-300:#b2b5d1;--n-400:#9295b7;
+  --n-500:#6a6e94;--n-600:#4f5276;--n-700:#383a57;--n-800:#202237;--n-900:#0f101f;
+  --bg:#e5eaff;--surface:#f6f8ff;--surface-2:#dfe4fb;--text:#1b1c36;--text-muted:#42465d;
+  --border:#3c4266;--primary:#49379f;--primary-contrast:#ffffff;--accent:#49379f;
+  --success:#00574e;--warning:#39417d;
+  --blob-a:#8968f4;--blob-b:#00abed;--blob-c:#2bd2c2;
+  --glass:rgba(255,255,255,.48);--glass-fallback:#f6f8ff;
+  --glass-border:#3c4266;--glass-highlight:rgba(255,255,255,.8);
+  --glass-shadow:0 16px 40px rgba(36,28,84,.16)}
+html[data-style="aurora"][data-mode="dark"]{
+  --bg:#100e24;--surface:#1d1b36;--surface-2:#2c2948;--text:#f3f4ff;--text-muted:#c0c2d8;
+  --border:#b7bddb;--primary:#b6aaff;--primary-contrast:#191731;--accent:#b6aaff;
+  --success:#7cd7cc;--warning:#bebdf7;
+  --blob-a:#945ff9;--blob-b:#02a9f7;--blob-c:#00d4c3;
+  --glass:rgba(29,27,54,.78);--glass-fallback:#1d1b36;
+  --glass-border:#c5c9ea;--glass-highlight:rgba(255,255,255,.28);
+  --glass-shadow:0 18px 46px rgba(0,0,0,.38)}
+html[data-style="aurora"] body{background:var(--bg);color:var(--text);font-family:Outfit,sans-serif}
 html[data-style="aurora"][lang=ar] body{font-family:var(--ar),Outfit,sans-serif}
-html[data-style="aurora"] .nav .bar{background:rgba(255,255,255,.45);backdrop-filter:blur(16px)}
-html[data-style="aurora"] .exp{padding:0 0 60px}
-.au-hero{min-height:92vh;display:flex;flex-direction:column;justify-content:flex-end;padding:12vh 8vw 10vh;color:#1a1030}
-.au-hero h1{font-family:Syne,sans-serif;font-size:clamp(3.4rem,9vw,7rem);line-height:.92;margin:0}
+.au-sky{position:fixed;inset:-12%;z-index:0;pointer-events:none;background:
+  radial-gradient(closest-side at 50% 48%,var(--blob-a),transparent 70%),
+  radial-gradient(closest-side at 8% 12%,var(--blob-b),transparent 68%),
+  radial-gradient(closest-side at 92% 88%,var(--blob-c),transparent 68%);
+  animation:au-drift 18s ease-in-out infinite alternate}
+@keyframes au-drift{from{transform:translate3d(-1.5%,-1%,0) scale(1)}to{transform:translate3d(1.5%,1.5%,0) scale(1.06)}}
+html[data-style="aurora"] .exp{position:relative;z-index:1;padding:0 0 60px}
+html[data-style="aurora"] .au-panel,
+html[data-style="aurora"] .au-card,
+html[data-style="aurora"] .au-project,
+html[data-style="aurora"] .nav .bar,
+html[data-style="aurora"] .xv-info{
+  background:var(--glass);color:var(--text);
+  -webkit-backdrop-filter:blur(18px) saturate(1.6);
+  backdrop-filter:blur(18px) saturate(1.6);
+  border:1px solid var(--glass-border);
+  box-shadow:var(--glass-shadow),inset 0 1px 0 var(--glass-highlight)}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  html[data-style="aurora"] .au-panel,
+  html[data-style="aurora"] .au-card,
+  html[data-style="aurora"] .au-project,
+  html[data-style="aurora"] .nav .bar,
+  html[data-style="aurora"] .xv-info{background:var(--glass-fallback)}
+}
+.au-hero{min-height:92vh;display:flex;flex-direction:column;justify-content:flex-end;padding:12vh 8vw 8vh}
+.au-hero-card{width:min(820px,92vw);margin:0;padding:28px;border-radius:28px}
+.au-hero h1{font-family:Syne,sans-serif;font-size:clamp(3.4rem,9vw,7rem);line-height:.92;margin:0;color:var(--text)}
 html[data-style="aurora"][lang=ar] .au-hero h1{font-family:var(--ar-head);line-height:1.2}
-.au-lead{max-width:40rem;font-size:1.15rem}
-.au-panel{width:min(820px,92vw);margin:8vh auto;padding:28px;border-radius:28px;background:rgba(255,255,255,.62);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.7)}
+.au-lead{max-width:40rem;font-size:1.15rem;color:var(--text)}
+.au-status{color:var(--accent);font-weight:650}
+.au-panel{width:min(820px,92vw);margin:8vh auto;padding:28px;border-radius:28px}
 .au-shift{margin-left:8vw}
 html[dir=rtl] .au-shift{margin-left:auto;margin-right:8vw}
 .au-late{transform:translateY(36px)}
 .au-split{display:grid;grid-template-columns:1fr 1fr;gap:18px;width:min(1000px,94vw);margin:6vh auto}
-.au-big{font-family:Syne,sans-serif;font-size:3rem;margin:8px 0}
-.au-project{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;align-items:center;width:min(1100px,94vw);margin:10vh auto;padding:12px}
+.au-big{font-family:Syne,sans-serif;font-size:3rem;margin:8px 0;color:var(--text)}
+.au-project{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;align-items:center;width:min(1100px,94vw);margin:10vh auto;padding:18px;border-radius:28px}
 .au-rev{grid-template-columns:.9fr 1.1fr}
 .au-rev img{order:2}
 .au-project img{width:100%;border-radius:24px}
-.au-link{font-weight:700}
+html[data-style="aurora"] a.au-link{font-weight:700;color:var(--accent)}
 .au-row{width:min(1100px,94vw);margin:18px auto}
 .au-rail{display:flex;gap:12px;overflow-x:auto;padding-bottom:10px}
-.au-card{flex:0 0 200px;border:0;border-radius:18px;overflow:hidden;background:rgba(255,255,255,.7);text-align:start;cursor:pointer}
+.au-card{flex:0 0 200px;border-radius:18px;overflow:hidden;text-align:start;cursor:pointer;padding:0}
 .au-card img{width:100%;height:120px;object-fit:cover;background:#fff}
-.au-card span{display:block;padding:8px 10px;color:#241433}
+.au-card span{display:block;padding:8px 10px;color:var(--text)}
 html[data-style="aurora"] .exp form{display:grid;gap:8px}
-html[data-style="aurora"] .xv-info{background:rgba(255,255,255,.92);color:#241433}
+html[data-style="aurora"] .exp input,html[data-style="aurora"] .exp textarea{background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:12px;padding:10px 12px;font:inherit}
+html[data-style="aurora"] .exp input::placeholder,html[data-style="aurora"] .exp textarea::placeholder{color:var(--text-muted)}
+html[data-style="aurora"] .exp form button{background:var(--primary);color:var(--primary-contrast);border:0;border-radius:999px;padding:10px 14px;font:inherit;font-weight:700;cursor:pointer}
+html[data-style="aurora"] .xv-info{border-radius:16px}
 @media(max-width:800px){
  .au-split,.au-project,.au-rev{grid-template-columns:1fr}
  .au-rev img{order:0}

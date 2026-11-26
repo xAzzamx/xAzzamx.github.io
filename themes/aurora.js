@@ -8,11 +8,16 @@ ThemeEngine.register("aurora", function(root){
     E.rails(root, {rowClass:"au-row", railClass:"au-rail", cardClass:"au-card"});
     return;
   }
+  var sky = E.h("div", "au-sky");
+  sky.setAttribute("aria-hidden", "true");
+  root.appendChild(sky);
   var hero = E.h("section", "au-hero");
-  hero.appendChild(E.h("p", "", E.t(S.hello)));
-  hero.appendChild(E.h("h1", "", E.t(S.name)));
-  hero.appendChild(E.h("p", "au-lead", E.t(S.lead)));
-  hero.appendChild(E.h("p", "au-status", E.t(S.status)));
+  var card = E.h("div", "au-panel au-hero-card");
+  card.appendChild(E.h("p", "", E.t(S.hello)));
+  card.appendChild(E.h("h1", "", E.t(S.name)));
+  card.appendChild(E.h("p", "au-lead", E.t(S.lead)));
+  card.appendChild(E.h("p", "au-status", E.t(S.status)));
+  hero.appendChild(card);
   root.appendChild(hero);
   var about = E.h("section", "au-panel au-shift");
   about.appendChild(E.h("h2", "", E.t(S.aboutTitle)));
