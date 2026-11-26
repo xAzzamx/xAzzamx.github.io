@@ -1,0 +1,28 @@
+/* Clay toy shelf. Warm pastels, one terracotta accent.
+   https://coolors.co/f6efe6-9a3d32-3a241c-f4c2ae-f6e3a1 */
+html[data-style="clay"]{
+  --bg:#f3e6da;--surface:#fff8f3;--surface-2:#f6d7cc;--text:#3a241c;--text-muted:#6a5146;
+  --border:#e7b5a4;--primary:#9a3d32;--primary-contrast:#fff8f3;--accent:#9a3d32;
+  --success:#2f5d34;--warning:#9a3d32}
+html[data-style="clay"][data-mode="dark"]{
+  --bg:#2a1c18;--surface:#3d2a24;--surface-2:#4a342c;--text:#fff4ee;--text-muted:#f0d2c6;
+  --border:#e8a090;--primary:#ffb4a2;--primary-contrast:#3a1c14;--accent:#ffb4a2;
+  --success:#c6e6c0;--warning:#ffb4a2}
+html[data-style="clay"] body{background:radial-gradient(circle at 10% 10%, #ffe9dc, var(--bg) 40%), var(--bg);color:var(--text);font-family:var(--sans);min-height:100vh}
+html[data-style="clay"][lang=ar] body{font-family:var(--ar)}
+.clay{width:min(1040px,96vw);margin:12px auto 28px;min-height:calc(100vh - 120px);display:flex;flex-direction:column;gap:18px}
+.clay-shelf{display:flex;flex-wrap:wrap;gap:18px;justify-content:center;padding:26px 18px 32px;background:linear-gradient(#f0c7ae, #e2ae92);border-radius:36px 36px 22px 22px;box-shadow:inset 0 10px 0 rgba(255,255,255,.45), inset 0 -12px 0 rgba(120,60,40,.12), 0 16px 0 #c4896e, 0 22px 24px rgba(90,40,20,.18)}
+html[data-style="clay"][data-mode="dark"] .clay-shelf{background:linear-gradient(#5a3a30, #3d2620);box-shadow:inset 0 10px 0 rgba(255,255,255,.08), 0 16px 0 #241410}
+.clay-block{position:relative;min-width:132px;min-height:108px;border:0;border-radius:32px;padding:16px 14px 18px;font:800 .95rem inherit;cursor:pointer;color:#3a241c;transition:transform .18s cubic-bezier(.2,.8,.2,1);box-shadow:inset 0 10px 0 rgba(255,255,255,.55), inset 0 -14px 0 rgba(0,0,0,.08), 0 12px 0 rgba(90,40,30,.12), 0 16px 18px rgba(90,40,20,.12)}
+.clay-block svg{width:28px;height:28px;display:block;margin:0 auto 6px}
+.clay-a{background:#f4c2ae}.clay-b{background:#f6e3a1}.clay-c{background:#c9e4c8}.clay-d{background:#f3b7c8}.clay-e{background:#c9d6f2}
+.clay-block:active{transform:translateY(10px) scale(.96,.88)}
+.clay-block.is-on{color:#fff8f3;background:#9a3d32;transform:translateY(-8px);animation:clay-pop .48s cubic-bezier(.2,.8,.2,1)}
+html[data-style="clay"][data-mode="dark"] .clay-block.is-on{color:#3a1c14;background:#ffb4a2}
+@keyframes clay-pop{0%{transform:translateY(8px) scale(1,.9)}55%{transform:translateY(-16px) scale(1.06,1.1)}100%{transform:translateY(-8px)}}
+.clay-panel{flex:1;background:var(--surface);color:var(--text);border-radius:36px;padding:22px 20px;min-height:280px;box-shadow:inset 0 14px 0 rgba(255,255,255,.65), inset 0 -16px 0 rgba(180,100,80,.12), 0 18px 0 rgba(232,160,144,.55)}
+html[data-style="clay"][data-mode="dark"] .clay-panel{box-shadow:inset 0 10px 0 rgba(255,255,255,.06), 0 16px 0 #1a100e}
+html[data-style="clay"][lang=ar] .clay-panel h2{font-family:var(--ar-head)}
+.clay-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.clay-chips span{background:#f6e3a1;color:#3a241c;border-radius:999px;padding:8px 12px;font-weight:700;box-shadow:inset 0 -5px 0 rgba(0,0,0,.08), inset 0 4px 0 rgba(255,255,255,.6)}
+@media(prefers-reduced-motion:reduce){.clay-block{transition:none}.clay-block.is-on{animation:none;transform:translateY(-6px)}}

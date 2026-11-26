@@ -2,18 +2,16 @@ window.SITE = {
   name: {en:"Azzam Alzahrani", ar:"عزام الزهراني"},
   hello: {en:"Hello, I'm", ar:"أهلًا، أنا"},
   role: {en:"Computer Science Graduate | Cybersecurity and AI", ar:"خريج علوم الحاسب | الأمن السيبراني والذكاء الاصطناعي"},
-  lead: {en:"Computer Science graduate from Imam Abdulrahman Bin Faisal University, building practical skills in cybersecurity, deep learning and software systems. Planning a master's in cybersecurity or AI. Next step: an MSc in Cyber Security at Asia Pacific University, Malaysia. I have not started it.", ar:"خريج علوم الحاسب من جامعة الإمام عبدالرحمن بن فيصل، أطوّر مهاراتي العملية في الأمن السيبراني والتعلّم العميق والأنظمة البرمجية. أخطط لدراسة الماجستير في الأمن السيبراني أو الذكاء الاصطناعي. الخطوة القادمة: ماجستير الأمن السيبراني في جامعة آسيا والمحيط الهادئ بماليزيا، ولم أبدأ الدراسة بعد."},
+  lead: {en:"Computer Science graduate from Imam Abdulrahman Bin Faisal University, building practical skills in cybersecurity, deep learning and software systems. Next step: MSc in Cyber Security, Asia Pacific University (planned, March 2027).", ar:"خريج علوم الحاسب من جامعة الإمام عبدالرحمن بن فيصل، أطوّر مهاراتي العملية في الأمن السيبراني والتعلّم العميق والأنظمة البرمجية. الخطوة القادمة: ماجستير الأمن السيبراني في جامعة آسيا والمحيط الهادئ (مخطط، مارس 2027)."},
   status: {en:"Open to opportunities", ar:"متاح لفرص العمل"},
   aboutTitle: {en:"Cybersecurity and AI, grounded in solid CS fundamentals", ar:"الأمن السيبراني والذكاء الاصطناعي على أساس متين من علوم الحاسب"},
   about: [
     {en:"I am a recent Computer Science graduate from Imam Abdulrahman Bin Faisal University, where my degree was taught entirely in English. Through cooperative training I gained practical experience in systems analysis, requirements gathering, technical documentation, prototyping and software testing.", ar:"تخرجت حديثًا في علوم الحاسب من جامعة الإمام عبدالرحمن بن فيصل، وكانت دراستي باللغة الإنجليزية بالكامل. واكتسبت خلال التدريب التعاوني خبرة عملية في تحليل الأنظمة وجمع المتطلبات والتوثيق التقني وبناء النماذج الأولية واختبار البرمجيات."},
-    {en:"My academic work covers programming, databases, web development, artificial intelligence and deep learning, and my main interests are cybersecurity and AI. I am planning a master's and have not started one. I hold an unconditional offer for a future MSc in Cyber Security at Asia Pacific University (APU), Malaysia.", ar:"تشمل دراستي البرمجة وقواعد البيانات وتطوير الويب والذكاء الاصطناعي والتعلّم العميق، واهتمامي الأساسي هو الأمن السيبراني والذكاء الاصطناعي. أخطط للماجستير ولم أبدأه بعد. وحصلت على قبول غير مشروط لماجستير مستقبلي في الأمن السيبراني في جامعة آسيا والمحيط الهادئ (APU) بماليزيا."}
+    {en:"My academic work covers programming, databases, web development, artificial intelligence and deep learning, and my main interests are cybersecurity and AI.", ar:"تشمل دراستي البرمجة وقواعد البيانات وتطوير الويب والذكاء الاصطناعي والتعلّم العميق، واهتمامي الأساسي هو الأمن السيبراني والذكاء الاصطناعي."}
   ],
   quote: {en:"My main interests are cybersecurity and AI.", ar:"اهتمامي الأساسي هو الأمن السيبراني والذكاء الاصطناعي."},
-  msc: {en:"Planned: MSc Cyber Security", ar:"مخطط له: ماجستير الأمن السيبراني", where:{en:"Asia Pacific University of Technology and Innovation (APU), Malaysia. A planned next step, not a program already underway.", ar:"جامعة آسيا والمحيط الهادئ للتكنولوجيا والابتكار (APU)، ماليزيا. خطوة قادمة مخططة، وليست دراسة بدأت."}, pills:[
-    {en:"Not started", ar:"لم يبدأ"},
+  msc: {en:"Next step: MSc in Cyber Security", ar:"الخطوة القادمة: ماجستير الأمن السيبراني", where:{en:"Asia Pacific University (planned, March 2027)", ar:"جامعة آسيا والمحيط الهادئ (مخطط، مارس 2027)"}, pills:[
     {en:"Unconditional offer", ar:"قبول غير مشروط"},
-    {en:"Planned for March 2027", ar:"مخطط لمارس 2027"},
     {en:"Dual award with De Montfort University (UK)", ar:"شهادة مزدوجة مع جامعة De Montfort (المملكة المتحدة)"}
   ]},
   step: {en:"STEP score, Advanced level", ar:"درجة اختبار STEP، مستوى متقدم", n:"81"},

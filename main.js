@@ -48,9 +48,9 @@
   document.querySelectorAll(".year").forEach(function(y){ y.textContent = new Date().getFullYear(); });
 
   // Style switcher. Classic is the absence of data-style, so the current design stays untouched.
-  var STYLE_OK = {classic:1, terminal:1, aurora:1, brutal:1, synth:1, editorial:1, blueprint:1, bento:1};
-  var THEME_JS = {terminal:1, aurora:1, brutal:1, synth:1, editorial:1, blueprint:1, bento:1};
-  var ASSET = "v=20261129";
+  var STYLE_OK = {classic:1, terminal:1, aurora:1, brutal:1, synth:1, editorial:1, blueprint:1, bento:1, win95:1, room:1, manga:1, aero:1, clay:1, film:1};
+  var THEME_JS = {terminal:1, aurora:1, brutal:1, synth:1, editorial:1, blueprint:1, bento:1, win95:1, room:1, manga:1, aero:1, clay:1, film:1};
+  var ASSET = "v=20261201";
   var BOOT_BG = {
     terminal:{light:"#f0f8f1",dark:"#061308"},
     aurora:{light:"#e5eaff",dark:"#100e24"},
@@ -58,7 +58,13 @@
     synth:{light:"#fbf2fb",dark:"#17091a"},
     editorial:{light:"#f8f1e5",dark:"#18100a"},
     blueprint:{light:"#ebf3fc",dark:"#0e2440"},
-    bento:{light:"#f1f6fa",dark:"#0d1218"}
+    bento:{light:"#f1f6fa",dark:"#0d1218"},
+    win95:{light:"#008080",dark:"#0d3333"},
+    room:{light:"#f4efe6",dark:"#1a140f"},
+    manga:{light:"#f7f4ea",dark:"#141414"},
+    aero:{light:"#c5e8f8",dark:"#1a2744"},
+    clay:{light:"#f6efe6",dark:"#2a1c18"},
+    film:{light:"#efe8dc",dark:"#0e0e0e"}
   };
   function bootColor(id){
     var mode = root.getAttribute("data-mode") === "dark" ? "dark" : "light";

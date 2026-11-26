@@ -1,0 +1,41 @@
+/* Frutiger Aero. Sky, grass, water, glossy orbs. One aqua accent.
+   https://coolors.co/7ec8f0-0a5a82-0b2540-e8f7ff-16324f */
+html[data-style="aero"]{
+  --bg:#b9e4f6;--surface:rgba(255,255,255,.88);--surface-2:#e7f6ff;--text:#0b2540;--text-muted:#24506e;
+  --border:#0a5a82;--primary:#0a5a82;--primary-contrast:#ffffff;--accent:#0a5a82;
+  --success:#0f6b45;--warning:#8a4b12;--sky:linear-gradient(#7ec8f0 0%, #d7f3ff 46%, #8fd0ea 62%, #5dae72 78%, #2f8f4a 100%);--sun:#ffe38a}
+html[data-style="aero"][data-mode="dark"]{
+  --bg:#152038;--surface:rgba(16,28,48,.88);--surface-2:#243656;--text:#f4f7ff;--text-muted:#d5e8f8;
+  --border:#8fd4ff;--primary:#8fd4ff;--primary-contrast:#0c2438;--accent:#8fd4ff;
+  --success:#b7e0c2;--warning:#f0c14a;--sky:linear-gradient(#12182e 0%, #3a2a55 42%, #1a2744 60%, #16324a 78%, #0e3a28 100%);--sun:#f3e7ff}
+html[data-style="aero"] body{background:var(--sky);color:var(--text);font-family:var(--sans);min-height:100vh}
+html[data-style="aero"][lang=ar] body{font-family:var(--ar)}
+.aero{position:relative;z-index:1;width:min(1100px,96vw);margin:10px auto 28vh;display:grid;grid-template-columns:150px 1fr 230px;gap:16px}
+.aero-bubbles,.aero-sun,.aero-flare,.aero-grass{position:fixed;pointer-events:none;z-index:0}
+.aero-bubbles{inset:0;overflow:hidden}
+.aero-bubbles i{position:absolute;bottom:-30px;border-radius:50%;border:2px solid rgba(255,255,255,.75);background:rgba(255,255,255,.2);animation:aero-up 12s linear infinite}
+@keyframes aero-up{to{transform:translateY(-105vh)}}
+.aero-sun{width:140px;height:140px;border-radius:50%;background:var(--sun);top:86px;inset-inline-end:6vw;box-shadow:0 0 40px var(--sun), 0 0 80px rgba(255,220,120,.45)}
+.aero-flare{width:220px;height:220px;border-radius:50%;top:40px;inset-inline-end:2vw;background:radial-gradient(circle, rgba(255,255,255,.55), transparent 62%);mix-blend-mode:screen}
+.aero-grass{left:-10%;right:-10%;bottom:-20px;height:24vh;background:linear-gradient(#7dce7a, #2f8f4a);border-radius:50% 50% 0 0 / 80px;box-shadow:inset 0 16px 0 rgba(255,255,255,.25)}
+html[data-style="aero"][data-mode="dark"] .aero-grass{background:linear-gradient(#1d4a38, #0e2a22)}
+.aero-orbs{display:flex;flex-direction:column;gap:8px;align-items:center}
+.aero-orb{width:118px;border:0;background:transparent;cursor:pointer;padding:0;color:var(--text);font:800 .82rem inherit;animation:aero-float 4.6s ease-in-out infinite}
+.aero-orb:nth-child(2){animation-delay:.3s}.aero-orb:nth-child(3){animation-delay:.6s}
+.aero-ico{width:78px;height:78px;margin:0 auto;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;background:radial-gradient(circle at 32% 28%, #fff 0 12%, #7ec8f0 34%, #0a5a82 74%);box-shadow:0 10px 16px rgba(8,40,70,.28), inset 0 -8px 10px rgba(0,0,0,.2), inset 0 8px 10px rgba(255,255,255,.65);border:2px solid rgba(255,255,255,.85)}
+html[data-style="aero"][data-mode="dark"] .aero-ico{background:radial-gradient(circle at 32% 28%, #fff 0 10%, #b7e4ff 38%, #1d4e73 78%);color:#0c2438}
+.aero-ico svg{width:34px;height:34px}
+.aero-cap{display:block;margin-top:4px;background:rgba(255,255,255,.92);color:#0b2540;border-radius:999px;padding:3px 8px;box-shadow:0 2px 0 rgba(10,40,70,.12)}
+html[data-style="aero"][data-mode="dark"] .aero-cap{background:#0e1c33;color:#f4f7ff}
+@keyframes aero-float{50%{transform:translateY(-7px)}}
+.aero-card{position:relative;background:var(--surface);color:var(--text);border:1px solid rgba(255,255,255,.8);border-radius:28px;padding:20px 18px;box-shadow:0 18px 34px rgba(10,40,70,.2), inset 0 1px 0 #fff, inset 0 -18px 24px rgba(10,90,130,.06);overflow:hidden;-webkit-backdrop-filter:blur(12px) saturate(1.4);backdrop-filter:blur(12px) saturate(1.4)}
+.aero-card:before{content:"";position:absolute;left:8%;right:8%;top:0;height:42%;background:linear-gradient(rgba(255,255,255,.55), transparent);border-radius:0 0 40% 40%;pointer-events:none}
+.aero-side{display:flex;flex-direction:column;gap:10px}
+.aero-gadget{background:var(--surface);color:var(--text);border-radius:22px;padding:12px;border:1px solid rgba(255,255,255,.75);box-shadow:inset 0 1px 0 #fff}
+.aero-meter{height:10px;border-radius:999px;background:rgba(10,90,130,.18);overflow:hidden;margin:4px 0 8px}
+.aero-meter b{display:block;height:100%;background:linear-gradient(#7ec8f0, var(--primary));border-radius:999px}
+@media(max-width:800px){
+  .aero{grid-template-columns:1fr;margin-bottom:30vh}
+  .aero-orbs{flex-direction:row;flex-wrap:wrap;justify-content:center}
+}
+@media(prefers-reduced-motion:reduce){.aero-bubbles i,.aero-orb{animation:none}}
