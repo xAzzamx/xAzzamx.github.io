@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=Bangers&display=swap");
+/* Manga. Ink on paper, one crimson accent.
+   https://coolors.co/f7f4ea-111111-c1121f-f5f5f0-5c5346 */
+html[data-style="manga"]{
+  --bg:#f7f4ea;--surface:#fffdf8;--surface-2:#efe6d4;--text:#111111;--text-muted:#5c5346;
+  --border:#111111;--primary:#c1121f;--primary-contrast:#ffffff;--accent:#c1121f;
+  --success:#1d4d2c;--warning:#c1121f}
+html[data-style="manga"][data-mode="dark"]{
+  --bg:#141414;--surface:#1e1e1e;--surface-2:#2a2a2a;--text:#f5f5f0;--text-muted:#d2cdc4;
+  --border:#f5f5f0;--primary:#ff8b96;--primary-contrast:#2a0a10;--accent:#ff8b96;
+  --success:#b7e0c2;--warning:#ff8b96}
+html[data-style="manga"] body{background:var(--bg);color:var(--text);font-family:var(--sans);background-image:radial-gradient(var(--border) 0.9px, transparent 1px);background-size:7px 7px}
+html[data-style="manga"][lang=ar] body{font-family:var(--ar)}
+.mg{width:min(980px,94vw);margin:12px auto 40px}
+.mg-hero{display:grid;grid-template-columns:1.2fr .8fr;gap:10px}
+.mg-panel{background:var(--surface);color:var(--text);border:3px solid var(--border);padding:12px;position:relative;box-shadow:6px 6px 0 var(--border);animation:mg-slam .55s both}
+.mg-panel:nth-child(2){animation-delay:.12s}
+.mg-panel:nth-child(3){animation-delay:.24s}
+.mg-hero .mg-panel:first-child{grid-row:span 2}
+@keyframes mg-slam{from{transform:translateY(-36px) rotate(-3deg);opacity:0}to{transform:none;opacity:1}}
+.mg-name{font-size:clamp(2rem,6vw,3.4rem);line-height:1;margin:0}
+html[data-style="manga"][lang=ar] .mg-name{font-family:var(--ar-head);line-height:1.3}
+.mg-bubble{background:var(--surface-2);border:3px solid var(--border);border-radius:18px;padding:8px 12px;margin:8px 0}
+.mg-sfx{font-family:Bangers,sans-serif;color:var(--accent);font-size:2rem;letter-spacing:.04em;margin:0}
+html[data-style="manga"][lang=ar] .mg-sfx{font-family:var(--ar-head);letter-spacing:0}
+.mg-strip{display:flex;gap:10px;overflow-x:auto;padding:12px 0}
+.mg-frame{flex:0 0 240px;border:3px solid var(--border);background:var(--surface);color:var(--text);padding:10px}
+.mg-chapter{border:3px solid var(--accent);padding:14px;margin-top:12px;background:var(--surface)}
+.mg.turn{animation:mg-turn .45s ease}
+@keyframes mg-turn{0%{transform:perspective(900px) rotateY(0)}45%{transform:perspective(900px) rotateY(-12deg)}100%{transform:none}}
+html[dir=rtl] .mg.turn{animation-name:mg-turn-rtl}
+@keyframes mg-turn-rtl{0%{transform:perspective(900px) rotateY(0)}45%{transform:perspective(900px) rotateY(12deg)}100%{transform:none}}
+html[data-style="manga"] .mg-next{background:var(--primary);color:var(--primary-contrast);border:3px solid var(--border);font:inherit;font-weight:700;padding:8px 12px;cursor:pointer}
+@media(max-width:800px){.mg-hero{grid-template-columns:1fr}.mg-hero .mg-panel:first-child{grid-row:auto}}
+@media(prefers-reduced-motion:reduce){.mg-panel,.mg.turn{animation:none}}

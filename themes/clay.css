@@ -1,0 +1,21 @@
+/* Claymorphism. Warm toy clay, one terracotta accent.
+   https://coolors.co/f6efe6-9a3d32-3a241c-e8a090-fff8f3 */
+html[data-style="clay"]{
+  --bg:#f6efe6;--surface:#fff8f3;--surface-2:#f0ddd4;--text:#3a241c;--text-muted:#6a5146;
+  --border:#e8a090;--primary:#9a3d32;--primary-contrast:#fff8f3;--accent:#9a3d32;
+  --success:#2f5d34;--warning:#9a3d32}
+html[data-style="clay"][data-mode="dark"]{
+  --bg:#2a1c18;--surface:#3d2a24;--surface-2:#4a342c;--text:#fff4ee;--text-muted:#f0d2c6;
+  --border:#e8a090;--primary:#ffb4a2;--primary-contrast:#3a1c14;--accent:#ffb4a2;
+  --success:#c6e6c0;--warning:#ffb4a2}
+html[data-style="clay"] body{background:var(--bg);color:var(--text);font-family:var(--sans)}
+html[data-style="clay"][lang=ar] body{font-family:var(--ar)}
+.clay{width:min(1000px,94vw);margin:16px auto 40px}
+.clay-shelf{display:flex;flex-wrap:wrap;gap:16px;padding:18px;background:var(--surface-2);border-radius:32px;box-shadow:inset 0 8px 0 rgba(255,255,255,.35), 0 12px 0 #e0b8a8}
+html[data-style="clay"][data-mode="dark"] .clay-shelf{box-shadow:inset 0 8px 0 rgba(255,255,255,.06), 0 12px 0 #1a100e}
+.clay-block{min-width:140px;border:0;border-radius:28px;padding:18px 16px;background:var(--border);color:var(--text);font:800 1rem inherit;cursor:pointer;box-shadow:inset 0 -10px 0 rgba(0,0,0,.12), inset 0 8px 0 rgba(255,255,255,.35), 0 10px 0 rgba(0,0,0,.08);transition:transform .15s}
+.clay-block:active{transform:translateY(8px) scale(.96,.9)}
+.clay-block.is-on{transform:translateY(-10px);background:var(--primary);color:var(--primary-contrast)}
+.clay-panel{margin-top:18px;background:var(--surface);color:var(--text);border-radius:32px;padding:18px;box-shadow:inset 0 -12px 0 rgba(0,0,0,.06), inset 0 10px 0 rgba(255,255,255,.5), 0 14px 0 rgba(232,160,144,.45)}
+html[data-style="clay"][lang=ar] .clay-panel h2{font-family:var(--ar-head)}
+@media(prefers-reduced-motion:reduce){.clay-block{transition:none}}
