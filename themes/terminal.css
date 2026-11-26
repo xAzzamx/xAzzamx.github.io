@@ -1,0 +1,73 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap");
+/* Terminal: a single column command log for a cybersecurity graduate. */
+html[data-style="terminal"]{color-scheme:dark;--bg:#04110a;--paper:#07140e;--paper2:#0a1c12;--line:#145c32;--line2:#1f8a3b;--ink:#c8ffd4;--ink2:#9eeeb4;--mut:#6fbf84;--dim:#4e8f62;--clay:#39ff78;--clay-d:#39ff78;--clay-l:#102818;--sage:#39ff78;--sage-d:#b7ffc9;--sage-l:#102818;--olive:#07140e;--sand:#102818;--mustard:#d6ff4a;--mustard-l:#102818;--r:0px;--shadow:none;--shadow-h:none;--sans:"IBM Plex Mono",ui-monospace,monospace;--serif:"IBM Plex Mono",ui-monospace,monospace}
+html[data-style="terminal"] body{background:#04110a;color:#c8ffd4;font-family:"IBM Plex Mono",ui-monospace,monospace}
+html[data-style="terminal"][lang=ar] body{font-family:var(--ar),"IBM Plex Mono",sans-serif}
+html[data-style="terminal"][lang=ar] h1,html[data-style="terminal"][lang=ar] h2,html[data-style="terminal"][lang=ar] h3{font-family:var(--ar-head)}
+html[data-style="terminal"] body::before{display:none}
+html[data-style="terminal"] body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.45;mix-blend-mode:normal;background:repeating-linear-gradient(to bottom,rgba(0,0,0,.35) 0 1px,transparent 1px 3px);animation:none;filter:none}
+html[data-style="terminal"] ::selection{background:#39ff78;color:#04110a}
+html[data-style="terminal"] a{color:#7dffb0}
+html[data-style="terminal"] header.nav{top:0;margin-top:0}
+html[data-style="terminal"] .nav .bar{height:54px;border-radius:0;background:#07140e;border:1px solid #1f8a3b;box-shadow:none}
+html[data-style="terminal"] .brand{font-family:"IBM Plex Mono",ui-monospace,monospace}
+html[data-style="terminal"] .mark{border-radius:0;transform:none;background:#39ff78;color:#04110a}
+html[data-style="terminal"] .brand:hover .mark{transform:none}
+html[data-style="terminal"] .nav ul a{border-radius:0}
+html[data-style="terminal"] .nav ul a:hover{background:#102818;color:#39ff78}
+html[data-style="terminal"] .lang-btn{border-radius:0;background:#39ff78;color:#04110a;border-color:#39ff78}
+html[data-style="terminal"] .menu-btn{border-radius:0;background:#07140e;border-color:#1f8a3b}
+html[data-style="terminal"] .menu-btn span{background:#39ff78}
+html[data-style="terminal"] .style-btn,.html[data-style="terminal"] .style-menu,html[data-style="terminal"] .style-btn,html[data-style="terminal"] .style-menu{border-radius:0;background:#07140e;color:#c8ffd4;border-color:#1f8a3b;box-shadow:none}
+html[data-style="terminal"] .style-menu li[aria-selected="true"],html[data-style="terminal"] .style-menu li:hover{background:#102818;color:#39ff78}
+html[data-style="terminal"] .sx{background:#102818;color:#39ff78;border-radius:0}
+html[data-style="terminal"] .bento{display:flex;flex-direction:column;gap:12px;max-width:860px;margin:0 auto}
+html[data-style="terminal"] .tile{width:100%;border-radius:0;background:#07140e;border:1px solid #1f8a3b;box-shadow:none;color:#c8ffd4}
+html[data-style="terminal"] .tile:hover,html[data-style="terminal"] .reveal.in:hover{transform:none;border-color:#39ff78;box-shadow:0 0 0 1px #39ff78}
+html[data-style="terminal"] .blob,html[data-style="terminal"] .spark,html[data-style="terminal"] .squiggle{display:none}
+html[data-style="terminal"] .label{font-family:"IBM Plex Mono",ui-monospace,monospace;color:#6fbf84;letter-spacing:.12em}
+html[data-style="terminal"] .label::before{content:"> "}
+html[data-style="terminal"] .label svg{border-radius:0;background:#102818;color:#39ff78}
+html[data-style="terminal"] .hero{min-height:0;background:#07140e;background-image:none}
+html[data-style="terminal"] .hero h1{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:clamp(1.8rem,4vw,2.8rem);letter-spacing:0;font-weight:600}
+html[data-style="terminal"] .hero h1::before{content:"> "}
+html[data-style="terminal"] .hero h1::after{content:"_";margin-inline-start:2px;animation:termBlink 1.05s steps(1) infinite}
+@keyframes termBlink{50%{opacity:0}}
+html[data-style="terminal"] .hello,.html[data-style="terminal"] .role,html[data-style="terminal"] .hello,html[data-style="terminal"] .role{font-family:"IBM Plex Mono",ui-monospace,monospace;font-style:normal;color:#39ff78}
+html[data-style="terminal"] .lead,html[data-style="terminal"] p{color:#9eeeb4}
+html[data-style="terminal"] .status{border-radius:0;background:#102818;border-color:#1f8a3b;color:#39ff78}
+html[data-style="terminal"] .btn{border-radius:0;border-color:#39ff78;color:#39ff78;box-shadow:none}
+html[data-style="terminal"] .btn:hover{background:#39ff78;color:#04110a}
+html[data-style="terminal"] .btn.primary{background:#39ff78;color:#04110a;border-color:#39ff78;box-shadow:none}
+html[data-style="terminal"] .btn.primary:hover{background:#d6ff4a;color:#04110a;border-color:#d6ff4a;box-shadow:none;transform:none}
+html[data-style="terminal"] .offer,.html[data-style="terminal"] .research,html[data-style="terminal"] .offer,html[data-style="terminal"] .research,html[data-style="terminal"] .focus,html[data-style="terminal"] .certs,html[data-style="terminal"] .contact{background:#07140e;background-image:none}
+html[data-style="terminal"] .step{background:#0c2416;border-color:#39ff78;color:#c8ffd4}
+html[data-style="terminal"] .step .big,html[data-style="terminal"] .big,html[data-style="terminal"] .research .big,html[data-style="terminal"] .stat b{color:#39ff78;font-family:"IBM Plex Mono",ui-monospace,monospace}
+html[data-style="terminal"] .pill,.html[data-style="terminal"] .chip,html[data-style="terminal"] .pill,html[data-style="terminal"] .chip,html[data-style="terminal"] .stat{border-radius:0;background:#0a1c12;border-color:#1f8a3b;color:#c8ffd4}
+html[data-style="terminal"] .pill.a,html[data-style="terminal"] .pill.t{color:#39ff78;background:#102818}
+html[data-style="terminal"] .link-tile,.html[data-style="terminal"] .li-tile,html[data-style="terminal"] .link-tile,html[data-style="terminal"] .li-tile{background:#07140e;color:#c8ffd4;border-color:#1f8a3b;min-height:0}
+html[data-style="terminal"] .li-tile small,html[data-style="terminal"] .link-tile small{color:#6fbf84}
+html[data-style="terminal"] .link-tile .ico{border-radius:0;background:#102818;color:#39ff78}
+html[data-style="terminal"] .link-tile .go{border-radius:0;border-color:#1f8a3b;color:#39ff78}
+html[data-style="terminal"] .project .media,.html[data-style="terminal"] .media.has-images .main,html[data-style="terminal"] .project .media,html[data-style="terminal"] .media.has-images .main{background:#04110a;border-color:#1f8a3b}
+html[data-style="terminal"] .stat:hover{background:#102818;transform:none}
+html[data-style="terminal"] details.cw{border-radius:0;background:#0a1c12;border-color:#1f8a3b}
+html[data-style="terminal"] details.cw[open]{background:#07140e}
+html[data-style="terminal"] details.cw summary{color:#c8ffd4}
+html[data-style="terminal"] input,html[data-style="terminal"] textarea{background:#04110a;border-radius:0;border-color:#1f8a3b;color:#c8ffd4}
+html[data-style="terminal"] footer{color:#6fbf84}
+html[data-style="terminal"] .all-certs{border-color:#39ff78;color:#39ff78;border-radius:0}
+html[data-style="terminal"] .all-certs:hover{background:#39ff78;color:#04110a}
+html[data-style="terminal"] .slide .img{border-radius:0;transform:none;box-shadow:none}
+html[data-style="terminal"] .dots button[aria-current="true"]{background:#39ff78}
+html[data-style="terminal"] .arrow,.html[data-style="terminal"] .cr-ctrl button,html[data-style="terminal"] .arrow,html[data-style="terminal"] .cr-ctrl button{border-radius:0;border-color:#39ff78;color:#39ff78}
+html[data-style="terminal"] .lb{background:rgba(2,10,5,.92)}
+html[data-style="terminal"] .cert-intro,html[data-style="terminal"] .cert-card,html[data-style="terminal"] .cf-card{background:#07140e;color:#c8ffd4;border:1px solid #1f8a3b;border-radius:0;box-shadow:none}
+html[data-style="terminal"] .cf-card.is-active{border-color:#39ff78;box-shadow:0 0 0 1px #39ff78}
+html[data-style="terminal"] .cert-card h3,html[data-style="terminal"] .cf-card h3,html[data-style="terminal"] .cert-group h2{font-family:"IBM Plex Mono",ui-monospace,monospace;color:#c8ffd4}
+html[data-style="terminal"][lang=ar] .cert-card h3,html[data-style="terminal"][lang=ar] .cf-card h3,html[data-style="terminal"][lang=ar] .cert-group h2{font-family:var(--ar-head)}
+html[data-style="terminal"] .cert-filters button{border-radius:0;background:#07140e;color:#c8ffd4;border-color:#1f8a3b}
+html[data-style="terminal"] .cert-filters button[aria-pressed="true"]{background:#39ff78;color:#04110a;border-color:#39ff78}
+html[data-style="terminal"] .cert-count,html[data-style="terminal"] .cf-count{color:#39ff78}
+html[data-style="terminal"] .cert-card:hover{transform:none}
+html[data-style="terminal"] .nav ul{border-radius:0}

@@ -1,0 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+/* Neo brutal: hard borders, offset shadows, poster type, flat color blocks. */
+html[data-style="brutal"]{color-scheme:light;--bg:#fff4c8;--paper:#fffdf6;--paper2:#fff;--line:#111;--line2:#111;--ink:#111;--ink2:#111;--mut:#222;--dim:#333;--clay:#ff5d8f;--clay-d:#111;--clay-l:#ffe500;--sage:#111;--sage-d:#111;--sage-l:#c8ff4d;--olive:#111;--sand:#ffe500;--mustard:#111;--mustard-l:#ffe500;--r:0px;--shadow:6px 6px 0 #111;--shadow-h:3px 3px 0 #111;--sans:"Space Grotesk",ui-sans-serif,system-ui,sans-serif;--serif:"Archivo Black","Space Grotesk",sans-serif}
+html[data-style="brutal"] body{background:#fff4c8;color:#111;font-family:"Space Grotesk",ui-sans-serif,system-ui,sans-serif;background-image:radial-gradient(#111 1px,transparent 1px);background-size:18px 18px}
+html[data-style="brutal"][lang=ar] body{font-family:var(--ar),"Space Grotesk",sans-serif}
+html[data-style="brutal"][lang=ar] h1,html[data-style="brutal"][lang=ar] h2,html[data-style="brutal"][lang=ar] h3,html[data-style="brutal"][lang=ar] .brand{font-family:var(--ar-head)}
+html[data-style="brutal"] body::before,html[data-style="brutal"] body::after{display:none}
+html[data-style="brutal"] h1,html[data-style="brutal"] h2,html[data-style="brutal"] .brand{font-family:"Archivo Black","Space Grotesk",sans-serif;letter-spacing:-.03em}
+html[data-style="brutal"][lang=ar] h1,html[data-style="brutal"][lang=ar] h2,html[data-style="brutal"][lang=ar] .brand{letter-spacing:0}
+html[data-style="brutal"] header.nav{top:8px}
+html[data-style="brutal"] .nav .bar{height:64px;border-radius:0;border:3px solid #111;background:#fff;box-shadow:6px 6px 0 #111}
+html[data-style="brutal"] .mark{border-radius:0;transform:none;background:#ff5d8f;color:#111}
+html[data-style="brutal"] .brand:hover .mark{transform:none}
+html[data-style="brutal"] .nav ul a{border-radius:0;font-weight:700}
+html[data-style="brutal"] .nav ul a:hover{background:#ffe500;color:#111}
+html[data-style="brutal"] .lang-btn,.html[data-style="brutal"] .style-btn,html[data-style="brutal"] .lang-btn,html[data-style="brutal"] .style-btn{border-radius:0;border:3px solid #111;box-shadow:3px 3px 0 #111}
+html[data-style="brutal"] .lang-btn{background:#111;color:#ffe500}
+html[data-style="brutal"] .style-btn{background:#fff;color:#111}
+html[data-style="brutal"] .style-menu{border-radius:0;border:3px solid #111;box-shadow:6px 6px 0 #111;background:#fff}
+html[data-style="brutal"] .style-menu li[aria-selected="true"]{background:#ffe500}
+html[data-style="brutal"] .sx{border-radius:0;background:#111;color:#ffe500}
+html[data-style="brutal"] .menu-btn{border-radius:0;border:3px solid #111;background:#fff}
+html[data-style="brutal"] .bento{grid-template-columns:repeat(12,minmax(0,1fr));gap:16px}
+html[data-style="brutal"] .tile{grid-column:span 4;border:3px solid #111;border-radius:0;box-shadow:7px 7px 0 #111;background:#fffdf6}
+html[data-style="brutal"] .hero{grid-column:span 8;grid-row:auto;background:#ffe500;background-image:none}
+html[data-style="brutal"] .s12,html[data-style="brutal"] .project,html[data-style="brutal"] .certs,html[data-style="brutal"] .contact,html[data-style="brutal"] .project-text{grid-column:span 12}
+html[data-style="brutal"] .tile:hover,html[data-style="brutal"] .reveal.in:hover{transform:translate(3px,3px);box-shadow:2px 2px 0 #111}
+html[data-style="brutal"] .link-tile{align-self:start;min-height:160px}
+html[data-style="brutal"] .blob{display:none}
+html[data-style="brutal"] .hero h1{text-transform:uppercase;font-size:clamp(2.8rem,6vw,5rem);line-height:.92}
+html[data-style="brutal"][lang=ar] .hero h1{text-transform:none;line-height:1.2}
+html[data-style="brutal"] .squiggle{color:#111}
+html[data-style="brutal"] .hello{font-style:normal;font-family:"Space Grotesk",sans-serif;color:#111}
+html[data-style="brutal"] .btn{border-radius:0;border-width:3px;box-shadow:4px 4px 0 #111;background:#fff}
+html[data-style="brutal"] .btn:hover{background:#111;color:#fff;transform:translate(2px,2px);box-shadow:0 0 0 #111}
+html[data-style="brutal"] .btn.primary{background:#ff5d8f;color:#111;border-color:#111;box-shadow:4px 4px 0 #111}
+html[data-style="brutal"] .btn.primary:hover{background:#111;color:#ffe500;border-color:#111;box-shadow:0 0 0 #111;transform:translate(2px,2px)}
+html[data-style="brutal"] .offer{background:#3dfff2;background-image:none}
+html[data-style="brutal"] .step{background:#111;color:#ffe500;border-color:#111}
+html[data-style="brutal"] .step .label,html[data-style="brutal"] .step .sub,html[data-style="brutal"] .step .big{color:#ffe500}
+html[data-style="brutal"] .research{background:#ff5d8f;background-image:none}
+html[data-style="brutal"] .research .big,html[data-style="brutal"] .big{color:#111;font-family:"Archivo Black",sans-serif}
+html[data-style="brutal"] .focus{background:#c8ff4d}
+html[data-style="brutal"] .certs,.html[data-style="brutal"] .contact,html[data-style="brutal"] .certs,html[data-style="brutal"] .contact{background:#fff;background-image:none}
+html[data-style="brutal"] .li-tile{background:#111;color:#ffe500;border-color:#111}
+html[data-style="brutal"] .li-tile small{color:#fff4c8}
+html[data-style="brutal"] .li-tile .ico{background:#ffe500;color:#111;border-radius:0}
+html[data-style="brutal"] .link-tile .ico,.html[data-style="brutal"] .link-tile .go,html[data-style="brutal"] .link-tile .ico,html[data-style="brutal"] .link-tile .go{border-radius:0}
+html[data-style="brutal"] .pill,.html[data-style="brutal"] .chip,html[data-style="brutal"] .stat,html[data-style="brutal"] .pill,html[data-style="brutal"] .chip,html[data-style="brutal"] .stat{border-radius:0;border:2px solid #111;background:#fff;box-shadow:3px 3px 0 #111}
+html[data-style="brutal"] .pill.a,html[data-style="brutal"] .pill.t{color:#111;background:#ffe500}
+html[data-style="brutal"] .label svg{border-radius:0;background:#ffe500;color:#111;border:2px solid #111}
+html[data-style="brutal"] .stat b{color:#111}
+html[data-style="brutal"] .stat:hover{transform:translate(2px,2px);background:#ffe500}
+html[data-style="brutal"] details.cw{border-radius:0;border:3px solid #111;box-shadow:4px 4px 0 #111;background:#fff}
+html[data-style="brutal"] input,html[data-style="brutal"] textarea{border-radius:0;border:3px solid #111;box-shadow:4px 4px 0 #111}
+html[data-style="brutal"] .slide .img{border-radius:0;transform:none;border:3px solid #111;box-shadow:6px 6px 0 #111}
+html[data-style="brutal"] .arrow{border-radius:0;border-width:3px;box-shadow:3px 3px 0 #111}
+html[data-style="brutal"] .all-certs{border-radius:0;border-width:3px;box-shadow:3px 3px 0 #111;height:auto;padding:4px 10px}
+html[data-style="brutal"] .cert-card,.html[data-style="brutal"] .cf-card,html[data-style="brutal"] .cert-card,html[data-style="brutal"] .cf-card,html[data-style="brutal"] .cert-intro{border:3px solid #111;border-radius:0;box-shadow:6px 6px 0 #111;background:#fff}
+html[data-style="brutal"] .cert-card:hover{transform:translate(3px,3px);box-shadow:2px 2px 0 #111}
+html[data-style="brutal"] .cert-filters button{border-radius:0;border:3px solid #111;box-shadow:3px 3px 0 #111;background:#fff;color:#111}
+html[data-style="brutal"] .cert-filters button[aria-pressed="true"]{background:#111;color:#ffe500}
+html[data-style="brutal"] .cf-card.is-active{box-shadow:8px 8px 0 #ff5d8f}
+html[data-style="brutal"] .nav ul{border-radius:0;border:3px solid #111}
+@media (max-width:800px){
+ html[data-style="brutal"] .bento{grid-template-columns:1fr}
+ html[data-style="brutal"] .tile,html[data-style="brutal"] .hero,html[data-style="brutal"] .s12,html[data-style="brutal"] .project{grid-column:1 / -1}
+}
