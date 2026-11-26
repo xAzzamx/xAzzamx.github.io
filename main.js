@@ -48,6 +48,7 @@
   // Style switcher. Classic is the absence of data-style, so the current design stays untouched.
   var STYLE_OK = {classic:1, terminal:1, aurora:1, brutal:1, synth:1, editorial:1, blueprint:1};
   var THEME_JS = {terminal:1, aurora:1, synth:1};
+  var ASSET = "v=20261126";
   var THEME_COLOR = {classic:"#f5eee3", terminal:"#04110a", aurora:"#1a1030", brutal:"#fff4c8", synth:"#140018", editorial:"#f3efe6", blueprint:"#0c3d86"};
   var styleBtn = document.getElementById("style-btn");
   var styleMenu = document.getElementById("style-menu");
@@ -76,7 +77,7 @@
   }
   function ensureThemeCss(id){
     var link = document.getElementById("theme-css");
-    var href = "themes/" + id + ".css";
+    var href = "themes/" + id + ".css?" + ASSET;
     if (!link){
       link = document.createElement("link");
       link.rel = "stylesheet";
@@ -88,7 +89,7 @@
   function loadThemeJs(id){
     if (!THEME_JS[id]) return;
     var sc = document.createElement("script");
-    sc.src = "themes/" + id + ".js";
+    sc.src = "themes/" + id + ".js?" + ASSET;
     sc.async = true;
     sc.setAttribute("data-theme", id);
     document.body.appendChild(sc);
@@ -125,36 +126,80 @@
     }
     markStyle(id);
   }
-  function openStyleMenu(){
+  var openedAt = 0;
+  function placeMenu(){
+    if (!styleMenu || styleMenu.hidden || !styleBtn) return;
+    var r = styleBtn.getBoundingClientRect();
+    var mw = Math.min(280, window.innerWidth - 16);
+    styleMenu.style.width = mw + "px";
+    var mh = styleMenu.offsetHeight || 280;
+    var top = r.bottom + 8;
+    if (top + mh > window.innerHeight - 8 && r.top > mh + 16) top = r.top - mh - 8;
+    if (top < 8) top = 8;
+    var left = root.dir === "rtl" ? r.left : r.right - mw;
+    if (left < 8) left = 8;
+    if (left + mw > window.innerWidth - 8) left = Math.max(8, window.innerWidth - 8 - mw);
+    styleMenu.style.top = Math.round(top) + "px";
+    styleMenu.style.left = Math.round(left) + "px";
+    styleMenu.style.right = "auto";
+  }
+  function optionFrom(node){
+    while (node && node !== styleMenu){
+      if (node.getAttribute && node.getAttribute("data-style-id")) return node;
+      node = node.parentNode;
+    }
+    return null;
+  }
+  function chooseStyle(li){
+    if (!li || !li.getAttribute || !li.getAttribute("data-style-id")) return;
+    applyStyle(li.getAttribute("data-style-id"), true);
+    closeStyleMenu();
+    try { styleBtn.focus({preventScroll:true}); } catch (err) {}
+  }
+  function openStyleMenu(fromKeyboard){
     if (!styleMenu) return;
+    if (styleMenu.parentNode !== document.body) document.body.appendChild(styleMenu);
     styleMenu.hidden = false;
     styleBtn.setAttribute("aria-expanded", "true");
-    var sel = styleMenu.querySelector('[aria-selected="true"]') || styleMenu.querySelector("[data-style-id]");
-    if (sel){ try { sel.focus({preventScroll:true}); } catch (err) { sel.focus(); } }
+    placeMenu();
+    openedAt = Date.now();
+    if (fromKeyboard){
+      var sel = styleMenu.querySelector('[aria-selected="true"]') || styleMenu.querySelector("[data-style-id]");
+      if (sel){ try { sel.focus({preventScroll:true}); } catch (err) {} }
+    }
   }
   function closeStyleMenu(){
     if (!styleMenu || styleMenu.hidden) return;
     styleMenu.hidden = true;
     styleBtn.setAttribute("aria-expanded", "false");
   }
+  function toggleStyleMenu(fromKeyboard){
+    if (styleMenu.hidden) openStyleMenu(fromKeyboard); else closeStyleMenu();
+  }
   if (styleBtn && styleMenu){
-    styleBtn.addEventListener("click", function(){
-      if (styleMenu.hidden) openStyleMenu(); else closeStyleMenu();
+    var touchToggle = false;
+    styleBtn.addEventListener("touchend", function(e){
+      e.preventDefault();
+      touchToggle = true;
+      toggleStyleMenu(false);
+    }, {passive:false});
+    styleBtn.addEventListener("click", function(e){
+      if (touchToggle){ touchToggle = false; e.preventDefault(); return; }
+      toggleStyleMenu(false);
     });
     styleBtn.addEventListener("keydown", function(e){
-      if (e.key === "ArrowDown" || e.key === "ArrowUp"){ e.preventDefault(); openStyleMenu(); }
+      if (e.key === "ArrowDown" || e.key === "ArrowUp"){ e.preventDefault(); openStyleMenu(true); }
     });
-    styleMenu.addEventListener("click", function(e){
-      var node = e.target;
-      var li = null;
-      while (node && node !== styleMenu){
-        if (node.getAttribute && node.getAttribute("data-style-id")){ li = node; break; }
-        node = node.parentNode;
-      }
+    styleMenu.addEventListener("touchend", function(e){
+      var li = optionFrom(e.target);
       if (!li) return;
-      applyStyle(li.getAttribute("data-style-id"), true);
-      closeStyleMenu();
-      styleBtn.focus();
+      e.preventDefault();
+      chooseStyle(li);
+    }, {passive:false});
+    styleMenu.addEventListener("click", function(e){
+      var li = optionFrom(e.target);
+      if (!li) return;
+      chooseStyle(li);
     });
     styleMenu.addEventListener("keydown", function(e){
       var items = [].slice.call(styleMenu.querySelectorAll("[data-style-id]"));
@@ -166,17 +211,18 @@
       if (e.key === "End"){ e.preventDefault(); items[items.length - 1].focus(); }
       if (e.key === "Enter" || e.key === " "){
         e.preventDefault();
-        var cur = document.activeElement;
-        if (cur && cur.getAttribute && cur.getAttribute("data-style-id")){
-          applyStyle(cur.getAttribute("data-style-id"), true);
-          closeStyleMenu();
-          styleBtn.focus();
-        }
+        chooseStyle(document.activeElement);
       }
     });
     document.addEventListener("click", function(e){
-      if (styleSwitch && !styleSwitch.contains(e.target)) closeStyleMenu();
+      if (!styleMenu || styleMenu.hidden) return;
+      if (Date.now() - openedAt < 450) return;
+      var t = e.target;
+      if ((styleBtn && styleBtn.contains(t)) || styleMenu.contains(t)) return;
+      closeStyleMenu();
     });
+    window.addEventListener("resize", placeMenu);
+    window.addEventListener("scroll", placeMenu, true);
     var initial = root.getAttribute("data-style");
     if (!STYLE_OK[initial]) initial = "classic";
     markStyle(initial);
