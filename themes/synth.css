@@ -1,68 +1,21 @@
-@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Rajdhani:wght@500;600;700&display=swap");
-/* Synthwave: sunset, perspective grid, neon type, two column night layout. */
-html[data-style="synth"]{color-scheme:dark;--bg:#140018;--paper:rgba(18,0,32,.78);--paper2:rgba(28,0,48,.8);--line:rgba(255,43,214,.55);--line2:#2de2e6;--ink:#ffe6fb;--ink2:#ffd0f4;--mut:#e7b6ea;--dim:#c084d0;--clay:#ff2bd6;--clay-d:#2de2e6;--clay-l:rgba(255,43,214,.16);--sage:#2de2e6;--sage-d:#d9fff8;--sage-l:rgba(45,226,230,.15);--olive:#140018;--sand:rgba(255,43,214,.18);--mustard:#ffb703;--mustard-l:rgba(255,183,3,.15);--r:4px;--shadow:0 0 24px rgba(255,43,214,.25);--shadow-h:0 0 32px rgba(45,226,230,.35);--sans:"Rajdhani",ui-sans-serif,system-ui,sans-serif;--serif:"Orbitron","Rajdhani",sans-serif}
-html[data-style="synth"] body{background:#140018;color:#ffe6fb;font-family:"Rajdhani",ui-sans-serif,system-ui,sans-serif;font-size:1.05rem}
-html[data-style="synth"][lang=ar] body{font-family:var(--ar),"Rajdhani",sans-serif}
-html[data-style="synth"][lang=ar] h1,html[data-style="synth"][lang=ar] h2,html[data-style="synth"][lang=ar] h3,html[data-style="synth"][lang=ar] .brand{font-family:var(--ar-head)}
-html[data-style="synth"] body::before{content:"";position:fixed;left:-60%;right:-60%;bottom:-20%;height:58vh;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(255,43,214,.5) 1px,transparent 1px),linear-gradient(90deg,rgba(45,226,230,.4) 1px,transparent 1px);background-size:70px 70px;transform:perspective(420px) rotateX(62deg);transform-origin:center top;animation:synthGrid 7s linear infinite;opacity:.8;mix-blend-mode:normal;filter:none}
-@keyframes synthGrid{from{background-position:0 0,0 0}to{background-position:0 70px,0 0}}
-html[data-style="synth"] body::after{content:"";position:fixed;width:min(540px,78vw);height:min(540px,78vw);border-radius:50%;left:50%;top:12%;transform:translate(-50%,0);z-index:0;pointer-events:none;background:radial-gradient(circle at 50% 42%,#ffe29a 0%,#ff8a1e 26%,#ff2d95 58%,transparent 72%);opacity:.95;mix-blend-mode:screen;filter:none;animation:none}
-html[data-style="synth"] h1,html[data-style="synth"] h2,html[data-style="synth"] .brand{font-family:"Orbitron","Rajdhani",sans-serif;letter-spacing:.04em}
-html[data-style="synth"] ::selection{background:#ff2bd6;color:#fff}
-html[data-style="synth"] a{color:#2de2e6}
-html[data-style="synth"] .nav .bar{border-radius:0;background:rgba(12,0,24,.72);border:1px solid #ff2bd6;box-shadow:0 0 18px rgba(255,43,214,.35);backdrop-filter:blur(8px)}
-html[data-style="synth"] .mark{border-radius:0;transform:none;background:transparent;color:#2de2e6;border:1px solid #2de2e6;box-shadow:0 0 10px #2de2e6}
-html[data-style="synth"] .brand:hover .mark{transform:none}
-html[data-style="synth"] .nav ul a{color:#ffd0f4}
-html[data-style="synth"] .nav ul a:hover{background:rgba(255,43,214,.2);color:#fff}
-html[data-style="synth"] .lang-btn{border-radius:0;background:#ff2bd6;border-color:#ff2bd6;color:#140018;box-shadow:0 0 12px #ff2bd6}
-html[data-style="synth"] .style-btn,html[data-style="synth"] .style-menu{border-radius:0;background:rgba(16,0,28,.92);color:#ffe6fb;border-color:#2de2e6;box-shadow:0 0 16px rgba(45,226,230,.25)}
-html[data-style="synth"] .style-menu li[aria-selected="true"],html[data-style="synth"] .style-menu li:hover{background:rgba(255,43,214,.25)}
-html[data-style="synth"] .sx{border-radius:0;background:transparent;color:#ff2bd6;border:1px solid #ff2bd6}
-html[data-style="synth"] .menu-btn{border-radius:0;background:transparent;border-color:#2de2e6}
-html[data-style="synth"] .menu-btn span{background:#2de2e6}
-html[data-style="synth"] .bento{grid-template-columns:1fr 1fr;gap:16px}
-html[data-style="synth"] .tile{grid-column:span 1;background:rgba(16,0,28,.72);border:1px solid rgba(255,43,214,.55);border-radius:2px;box-shadow:0 0 0 1px rgba(45,226,230,.25) inset,0 0 22px rgba(255,43,214,.18);color:#ffe6fb;backdrop-filter:blur(6px)}
-html[data-style="synth"] .hero,html[data-style="synth"] .s12,html[data-style="synth"] .project,html[data-style="synth"] .certs,html[data-style="synth"] .contact,html[data-style="synth"] .project-text{grid-column:1 / -1}
-html[data-style="synth"] .hero{grid-row:auto;min-height:78vh;text-align:center;align-items:center;background:transparent;background-image:none}
-html[data-style="synth"] .hero h1{font-size:clamp(2.4rem,6vw,4.6rem);background:linear-gradient(180deg,#fff,#ffb3f0 40%,#ff2bd6);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none}
-html[data-style="synth"] .hero .lead,html[data-style="synth"] .status,html[data-style="synth"] .btns{margin-inline:auto}
-html[data-style="synth"] .btns{justify-content:center}
-html[data-style="synth"] .squiggle{color:#2de2e6}
-html[data-style="synth"] .hello{color:#ff7ad9;font-family:"Rajdhani",sans-serif}
-html[data-style="synth"] .blob,html[data-style="synth"] .spark{display:none}
-html[data-style="synth"] .tile:hover,html[data-style="synth"] .reveal.in:hover{transform:translateY(-4px);box-shadow:0 0 24px rgba(45,226,230,.35)}
-html[data-style="synth"] .offer,.html[data-style="synth"] .research,html[data-style="synth"] .offer,html[data-style="synth"] .research,html[data-style="synth"] .focus,html[data-style="synth"] .certs,html[data-style="synth"] .contact,html[data-style="synth"] .step,html[data-style="synth"] .li-tile{background:rgba(16,0,28,.72);background-image:none;color:#ffe6fb;border-color:rgba(255,43,214,.55)}
-html[data-style="synth"] .step .big,html[data-style="synth"] .step .label,html[data-style="synth"] .step .sub,html[data-style="synth"] .big,html[data-style="synth"] .research .big,html[data-style="synth"] .stat b,html[data-style="synth"] .li-tile,html[data-style="synth"] .li-tile small{color:#ffe6fb}
-html[data-style="synth"] .stat b,html[data-style="synth"] .big{color:#2de2e6;font-family:"Orbitron",sans-serif}
-html[data-style="synth"] .btn{border-radius:0;border-color:#2de2e6;color:#2de2e6}
-html[data-style="synth"] .btn:hover{background:#2de2e6;color:#140018}
-html[data-style="synth"] .btn.primary{background:#ff2bd6;border-color:#ff2bd6;color:#140018;box-shadow:0 0 16px #ff2bd6}
-html[data-style="synth"] .btn.primary:hover{background:#2de2e6;border-color:#2de2e6;color:#140018;box-shadow:0 0 16px #2de2e6}
-html[data-style="synth"] .label{color:#ff7ad9;letter-spacing:.16em}
-html[data-style="synth"] .label svg{border-radius:0;background:rgba(255,43,214,.15);color:#ff2bd6}
-html[data-style="synth"] .pill,.html[data-style="synth"] .chip,html[data-style="synth"] .stat,html[data-style="synth"] .pill,html[data-style="synth"] .chip,html[data-style="synth"] .stat{border-radius:0;background:rgba(255,43,214,.08);border-color:rgba(45,226,230,.4);color:#ffe6fb}
-html[data-style="synth"] .link-tile .ico{border-radius:0;background:rgba(45,226,230,.12);color:#2de2e6}
-html[data-style="synth"] .link-tile .go{border-radius:0;border-color:#ff2bd6;color:#ff2bd6}
-html[data-style="synth"] p,.html[data-style="synth"] .lead,html[data-style="synth"] .lead{color:#f3d4f6}
-html[data-style="synth"] details.cw{border-radius:0;background:rgba(16,0,28,.65);border-color:rgba(255,43,214,.4)}
-html[data-style="synth"] details.cw summary{color:#ffe6fb}
-html[data-style="synth"] input,html[data-style="synth"] textarea{border-radius:0;background:rgba(8,0,16,.8);border-color:#ff2bd6;color:#ffe6fb}
-html[data-style="synth"] .slide .img{border-radius:0;transform:none;border-color:#ff2bd6;box-shadow:0 0 18px rgba(255,43,214,.35)}
-html[data-style="synth"] .all-certs{border-radius:0;border-color:#2de2e6;color:#2de2e6}
-html[data-style="synth"] .all-certs:hover{background:#2de2e6;color:#140018}
-html[data-style="synth"] .cert-card,.html[data-style="synth"] .cf-card,html[data-style="synth"] .cert-card,html[data-style="synth"] .cf-card,html[data-style="synth"] .cert-intro{background:rgba(16,0,28,.8);color:#ffe6fb;border:1px solid #ff2bd6;border-radius:2px;box-shadow:0 0 18px rgba(255,43,214,.25)}
-html[data-style="synth"] .cf-card.is-active{border-color:#2de2e6;box-shadow:0 0 22px rgba(45,226,230,.45)}
-html[data-style="synth"] .cert-card h3,html[data-style="synth"] .cf-card h3,html[data-style="synth"] .cert-group h2{font-family:"Orbitron",sans-serif;color:#ffe6fb}
-html[data-style="synth"][lang=ar] .cert-card h3,html[data-style="synth"][lang=ar] .cf-card h3,html[data-style="synth"][lang=ar] .cert-group h2{font-family:var(--ar-head)}
-html[data-style="synth"] .cert-filters button{border-radius:0;background:rgba(16,0,28,.8);color:#ffe6fb;border-color:#ff2bd6}
-html[data-style="synth"] .cert-filters button[aria-pressed="true"]{background:#ff2bd6;color:#140018;border-color:#ff2bd6}
-html[data-style="synth"] .cert-count,.html[data-style="synth"] .cf-count,html[data-style="synth"] .cert-count,html[data-style="synth"] .cf-count{color:#2de2e6}
-html[data-style="synth"] .lb{background:rgba(8,0,16,.88)}
-html[data-style="synth"] footer{color:#e7b6ea}
-html[data-style="synth"] .nav ul{background:rgba(12,0,24,.96);border-color:#ff2bd6;border-radius:0}
-@media (max-width:800px){
- html[data-style="synth"] .bento{grid-template-columns:1fr}
- html[data-style="synth"] .tile{grid-column:1 / -1}
- html[data-style="synth"] .hero h1{font-size:clamp(2rem,10vw,3rem)}
-}
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@500;700&display=swap");
+html[data-style="synth"] body{background:#140018;color:#ffe6fb;font-family:Rajdhani,sans-serif;background-image:linear-gradient(rgba(255,43,214,.35) 1px,transparent 1px),linear-gradient(90deg,rgba(45,226,230,.3) 1px,transparent 1px);background-size:48px 48px}
+html[data-style="synth"][lang=ar] body{font-family:var(--ar),Rajdhani,sans-serif}
+html[data-style="synth"] .nav .bar{border-radius:0;background:rgba(12,0,24,.8);border-color:#ff2bd6}
+html[data-style="synth"] h1,html[data-style="synth"] h2{font-family:Orbitron,sans-serif}
+html[data-style="synth"][lang=ar] h1,html[data-style="synth"][lang=ar] h2{font-family:var(--ar-head)}
+.syn-board{width:min(1000px,94vw);margin:20px auto 48px;min-height:74vh}
+.syn-kicker{letter-spacing:.18em;color:#2de2e6}
+.syn-levels{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.syn-level{display:flex;flex-direction:column;align-items:flex-start;gap:6px;text-align:start;background:rgba(16,0,28,.8);color:#ffe6fb;border:1px solid #ff2bd6;padding:16px;cursor:pointer;min-height:110px}
+.syn-no{font-family:Orbitron,sans-serif;color:#2de2e6;font-size:1.3rem}
+.syn-back,.syn-go{background:transparent;color:#2de2e6;border:1px solid #2de2e6;padding:8px 12px;cursor:pointer;margin-bottom:12px;display:inline-block}
+.syn-mission{border:1px solid rgba(255,43,214,.5);padding:12px;margin:10px 0}
+.syn-rail{display:flex;gap:10px;overflow-x:auto;padding-bottom:8px}
+.syn-card{flex:0 0 180px;background:#140018;color:#ffe6fb;border:1px solid #2de2e6;padding:0;text-align:start;cursor:pointer}
+.syn-card img{width:100%;height:100px;object-fit:cover;background:#fff}
+.syn-card span{display:block;padding:8px}
+.syn-view form{display:grid;gap:8px;max-width:420px}
+.syn-view input,.syn-view textarea{background:#140018;color:#ffe6fb;border:1px solid #ff2bd6;padding:8px;font:inherit}
+html[data-style="synth"] .xv-info{background:#140018;color:#ffe6fb;border:1px solid #ff2bd6}
+@media(max-width:700px){.syn-levels{grid-template-columns:1fr}}

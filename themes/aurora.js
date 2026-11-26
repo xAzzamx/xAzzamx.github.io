@@ -1,63 +1,62 @@
-(function(){
-  var NAME = "aurora";
-  if (document.documentElement.getAttribute("data-style") !== NAME) return;
-  var token = {};
-  window.__themeToken = token;
-  function alive(){ return window.__themeToken === token && document.documentElement.getAttribute("data-style") === NAME; }
-  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var c = document.createElement("canvas");
-  c.className = "theme-fx";
-  c.setAttribute("data-theme-root", "");
-  c.setAttribute("aria-hidden", "true");
-  document.body.prepend(c);
-  var ctx = c.getContext("2d");
-  var orbs = [];
-  var timer = 0;
-  var colors = ["255,160,210", "140,180,255", "120,255,220", "255,220,150", "190,160,255"];
-  function size(){
-    c.width = window.innerWidth;
-    c.height = window.innerHeight;
-    if (!orbs.length){
-      for (var i = 0; i < 8; i++){
-        orbs.push({
-          x: Math.random() * c.width,
-          y: Math.random() * c.height,
-          r: 80 + Math.random() * 160,
-          vx: (Math.random() - .5) * .35,
-          vy: (Math.random() - .5) * .35,
-          color: colors[i % colors.length]
-        });
-      }
-    }
+ThemeEngine.register("aurora", function(root){
+  var E = ThemeEngine, S = E.site;
+  if (E.page === "certs"){
+    root.appendChild(E.h("p", "au-kicker", E.isAr() ? "الأرشيف" : "Archive"));
+    root.appendChild(E.h("h1", "", E.isAr() ? "صفوف الشهادات" : "Certificate rows"));
+    var back = E.h("a", "au-link"); back.href = "index.html"; back.appendChild(E.bi("Back to the story", "العودة إلى القصة"));
+    root.appendChild(back);
+    E.rails(root, {rowClass:"au-row", railClass:"au-rail", cardClass:"au-card"});
+    return;
   }
-  function draw(){
-    if (!alive()){ clearInterval(timer); return; }
-    ctx.clearRect(0, 0, c.width, c.height);
-    for (var i = 0; i < orbs.length; i++){
-      var o = orbs[i];
-      if (!reduce){
-        o.x += o.vx; o.y += o.vy;
-        if (o.x < -o.r) o.x = c.width + o.r;
-        if (o.x > c.width + o.r) o.x = -o.r;
-        if (o.y < -o.r) o.y = c.height + o.r;
-        if (o.y > c.height + o.r) o.y = -o.r;
-      }
-      var g = ctx.createRadialGradient(o.x, o.y, 0, o.x, o.y, o.r);
-      g.addColorStop(0, "rgba(" + o.color + ",.35)");
-      g.addColorStop(1, "rgba(" + o.color + ",0)");
-      ctx.fillStyle = g;
-      ctx.beginPath();
-      ctx.arc(o.x, o.y, o.r, 0, Math.PI * 2);
-      ctx.fill();
-    }
+  var hero = E.h("section", "au-hero");
+  hero.appendChild(E.h("p", "", E.t(S.hello)));
+  hero.appendChild(E.h("h1", "", E.t(S.name)));
+  hero.appendChild(E.h("p", "au-lead", E.t(S.lead)));
+  hero.appendChild(E.h("p", "au-status", E.t(S.status)));
+  root.appendChild(hero);
+  var about = E.h("section", "au-panel au-shift");
+  about.appendChild(E.h("h2", "", E.t(S.aboutTitle)));
+  S.about.forEach(function(p){ about.appendChild(E.h("p", "", E.t(p))); });
+  root.appendChild(about);
+  var edu = E.h("section", "au-split");
+  var a = E.h("article", "au-panel");
+  a.appendChild(E.h("h2", "", E.t(S.edu.title)));
+  a.appendChild(E.h("p", "", E.t(S.edu.when)));
+  a.appendChild(E.h("p", "", E.t(S.edu.where)));
+  var b = E.h("article", "au-panel au-late");
+  b.appendChild(E.h("h2", "", E.t(S.msc)));
+  b.appendChild(E.h("p", "", E.t(S.msc.where)));
+  S.msc.pills.forEach(function(p){ b.appendChild(E.h("p", "", E.t(p))); });
+  b.appendChild(E.h("p", "au-big", "STEP " + S.step.n));
+  edu.appendChild(a); edu.appendChild(b);
+  root.appendChild(edu);
+  S.projects.forEach(function(p, i){
+    var sec = E.h("section", "au-project" + (i % 2 ? " au-rev" : ""));
+    if (p.img){ var im = E.h("img"); im.src = p.img; im.alt = ""; sec.appendChild(im); }
+    var tx = E.h("div", "");
+    tx.appendChild(E.h("h2", "", E.t(p.title)));
+    tx.appendChild(E.h("p", "", E.t(p.body)));
+    sec.appendChild(tx);
+    root.appendChild(sec);
+  });
+  var gate = E.h("section", "au-panel au-gate");
+  gate.appendChild(E.h("h2", "", E.isAr() ? "أرشيف الشهادات" : "Certificate archive"));
+  gate.appendChild(E.h("p", "", (E.isAr() ? "شهادة مرتبة في صفوف حسب المجال: " : "Certificates in field rows: ") + E.count()));
+  var go = E.h("a", "au-link"); go.href = "certificates.html"; go.appendChild(E.bi("Browse every row", "تصفح كل الصفوف"));
+  gate.appendChild(go);
+  root.appendChild(gate);
+  var contact = E.h("section", "au-panel");
+  contact.appendChild(E.h("h2", "", E.isAr() ? "تواصل" : "Contact"));
+  contact.appendChild(E.h("p", "", S.links.email));
+  contact.appendChild(E.form());
+  root.appendChild(contact);
+  if (!E.reduce){
+    var onScroll = function(){
+      var y = window.scrollY || 0;
+      hero.style.transform = "translateY(" + Math.round(y * 0.18) + "px)";
+    };
+    window.addEventListener("scroll", onScroll, {passive:true});
+    var prev = window.__themeCleanup;
+    window.__themeCleanup = function(){ window.removeEventListener("scroll", onScroll); if (prev) prev(); };
   }
-  function onResize(){ if (!alive()) return; c.width = window.innerWidth; c.height = window.innerHeight; }
-  size();
-  draw();
-  if (!reduce) timer = setInterval(draw, 40);
-  window.addEventListener("resize", onResize);
-  window.__themeCleanup = function(){
-    clearInterval(timer);
-    window.removeEventListener("resize", onResize);
-  };
-})();
+});
