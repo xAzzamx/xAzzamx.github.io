@@ -7,6 +7,10 @@
     en: "Azzam Alzahrani | Computer Science Graduate, Cybersecurity and AI",
     ar: "عزام الزهراني | خريج علوم الحاسب، الأمن السيبراني والذكاء الاصطناعي"
   };
+  var customTitleEn = document.body && document.body.getAttribute("data-title-en");
+  var customTitleAr = document.body && document.body.getAttribute("data-title-ar");
+  if (customTitleEn) TITLES.en = customTitleEn;
+  if (customTitleAr) TITLES.ar = customTitleAr;
   var langListeners = [];
 
   // Language
@@ -23,6 +27,10 @@
     });
     var lb = document.getElementById("lang-btn");
     if (lb) lb.setAttribute("aria-label", lang === "ar" ? "Switch to English" : "التبديل إلى العربية");
+    var styleBtnEl = document.getElementById("style-btn");
+    var styleMenuEl = document.getElementById("style-menu");
+    if (styleBtnEl) styleBtnEl.setAttribute("aria-label", lang === "ar" ? "التصاميم" : "Styles");
+    if (styleMenuEl) styleMenuEl.setAttribute("aria-label", lang === "ar" ? "التصاميم" : "Styles");
     if (save) { try { localStorage.setItem("lang", lang); } catch(e){} }
     langListeners.forEach(function(f){ f(); });
   }
@@ -37,6 +45,145 @@
   }
   document.querySelectorAll(".year").forEach(function(y){ y.textContent = new Date().getFullYear(); });
 
+  // Style switcher. Classic is the absence of data-style, so the current design stays untouched.
+  var STYLE_OK = {classic:1, terminal:1, aurora:1, brutal:1, synth:1, editorial:1, blueprint:1};
+  var THEME_JS = {terminal:1, aurora:1, synth:1};
+  var THEME_COLOR = {classic:"#f5eee3", terminal:"#04110a", aurora:"#1a1030", brutal:"#fff4c8", synth:"#140018", editorial:"#f3efe6", blueprint:"#0c3d86"};
+  var styleBtn = document.getElementById("style-btn");
+  var styleMenu = document.getElementById("style-menu");
+  var styleSwitch = document.getElementById("style-switch");
+  function themeMeta(id){
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute("content", THEME_COLOR[id] || THEME_COLOR.classic);
+  }
+  function markStyle(id){
+    if (!styleMenu) return;
+    styleMenu.querySelectorAll("[data-style-id]").forEach(function(li){
+      var on = li.getAttribute("data-style-id") === id;
+      li.setAttribute("aria-selected", on ? "true" : "false");
+      li.tabIndex = on ? 0 : -1;
+    });
+    if (styleBtn) styleBtn.classList.toggle("on", id !== "classic");
+  }
+  function clearThemeFx(){
+    window.__themeToken = null;
+    if (typeof window.__themeCleanup === "function"){
+      try { window.__themeCleanup(); } catch (err) {}
+      window.__themeCleanup = null;
+    }
+    document.querySelectorAll("[data-theme-root]").forEach(function(n){ n.remove(); });
+    document.querySelectorAll("script[data-theme]").forEach(function(n){ n.remove(); });
+  }
+  function ensureThemeCss(id){
+    var link = document.getElementById("theme-css");
+    var href = "themes/" + id + ".css";
+    if (!link){
+      link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.id = "theme-css";
+      document.head.appendChild(link);
+    }
+    if (link.getAttribute("href") !== href) link.setAttribute("href", href);
+  }
+  function loadThemeJs(id){
+    if (!THEME_JS[id]) return;
+    var sc = document.createElement("script");
+    sc.src = "themes/" + id + ".js";
+    sc.async = true;
+    sc.setAttribute("data-theme", id);
+    document.body.appendChild(sc);
+  }
+  function applyStyle(id, save){
+    if (!STYLE_OK[id]) id = "classic";
+    clearThemeFx();
+    var boot = document.getElementById("theme-boot");
+    if (id === "classic"){
+      root.removeAttribute("data-style");
+      var link = document.getElementById("theme-css");
+      if (link) link.remove();
+      if (boot) boot.remove();
+    } else {
+      root.setAttribute("data-style", id);
+      ensureThemeCss(id);
+      if (!boot){
+        boot = document.createElement("style");
+        boot.id = "theme-boot";
+        document.head.appendChild(boot);
+      }
+      boot.textContent = 'html[data-style="' + id + '"] body{background:' + THEME_COLOR[id] + "}";
+      loadThemeJs(id);
+    }
+    themeMeta(id);
+    if (save){
+      try { localStorage.setItem("style", id); } catch (err) {}
+      try {
+        var u = new URL(location.href);
+        if (id === "classic") u.searchParams.delete("style");
+        else u.searchParams.set("style", id);
+        history.replaceState(null, "", u.pathname + u.search + u.hash);
+      } catch (err) {}
+    }
+    markStyle(id);
+  }
+  function openStyleMenu(){
+    if (!styleMenu) return;
+    styleMenu.hidden = false;
+    styleBtn.setAttribute("aria-expanded", "true");
+    var sel = styleMenu.querySelector('[aria-selected="true"]') || styleMenu.querySelector("[data-style-id]");
+    if (sel){ try { sel.focus({preventScroll:true}); } catch (err) { sel.focus(); } }
+  }
+  function closeStyleMenu(){
+    if (!styleMenu || styleMenu.hidden) return;
+    styleMenu.hidden = true;
+    styleBtn.setAttribute("aria-expanded", "false");
+  }
+  if (styleBtn && styleMenu){
+    styleBtn.addEventListener("click", function(){
+      if (styleMenu.hidden) openStyleMenu(); else closeStyleMenu();
+    });
+    styleBtn.addEventListener("keydown", function(e){
+      if (e.key === "ArrowDown" || e.key === "ArrowUp"){ e.preventDefault(); openStyleMenu(); }
+    });
+    styleMenu.addEventListener("click", function(e){
+      var node = e.target;
+      var li = null;
+      while (node && node !== styleMenu){
+        if (node.getAttribute && node.getAttribute("data-style-id")){ li = node; break; }
+        node = node.parentNode;
+      }
+      if (!li) return;
+      applyStyle(li.getAttribute("data-style-id"), true);
+      closeStyleMenu();
+      styleBtn.focus();
+    });
+    styleMenu.addEventListener("keydown", function(e){
+      var items = [].slice.call(styleMenu.querySelectorAll("[data-style-id]"));
+      var i = items.indexOf(document.activeElement);
+      if (e.key === "Escape"){ e.preventDefault(); closeStyleMenu(); styleBtn.focus(); }
+      if (e.key === "ArrowDown"){ e.preventDefault(); items[(i + 1) % items.length].focus(); }
+      if (e.key === "ArrowUp"){ e.preventDefault(); items[(i - 1 + items.length) % items.length].focus(); }
+      if (e.key === "Home"){ e.preventDefault(); items[0].focus(); }
+      if (e.key === "End"){ e.preventDefault(); items[items.length - 1].focus(); }
+      if (e.key === "Enter" || e.key === " "){
+        e.preventDefault();
+        var cur = document.activeElement;
+        if (cur && cur.getAttribute && cur.getAttribute("data-style-id")){
+          applyStyle(cur.getAttribute("data-style-id"), true);
+          closeStyleMenu();
+          styleBtn.focus();
+        }
+      }
+    });
+    document.addEventListener("click", function(e){
+      if (styleSwitch && !styleSwitch.contains(e.target)) closeStyleMenu();
+    });
+    var initial = root.getAttribute("data-style");
+    if (!STYLE_OK[initial]) initial = "classic";
+    markStyle(initial);
+    themeMeta(initial);
+    if (initial !== "classic") loadThemeJs(initial);
+  }
+
   // Reveal on scroll with a gentle stagger
   var els = [].slice.call(document.querySelectorAll(".reveal"));
   if ("IntersectionObserver" in window && !reduce) {
@@ -47,15 +194,19 @@
     els.forEach(function(el){ io.observe(el); });
   } else els.forEach(function(el){ el.classList.add("in"); });
 
-  // Lightbox
-  var lb = document.getElementById("lightbox"), lbImg = lb.querySelector("img"), lbCap = lb.querySelector("p"), lbSet = [], lbI = 0, lastFocus;
-  function lbShow(){ var it = lbSet[lbI]; var alt = typeof it.alt === "function" ? it.alt() : (it.alt || ""); lbImg.src = it.src; lbImg.alt = alt; lbCap.textContent = alt; var m = lbSet.length > 1; lb.querySelector(".lp").hidden = !m; lb.querySelector(".ln").hidden = !m; }
-  function lbOpen(set, i){ lbSet = set; lbI = i; lastFocus = document.activeElement; lbShow(); lb.classList.add("open"); document.body.style.overflow = "hidden"; lb.querySelector(".x").focus(); }
-  function lbClose(){ lb.classList.remove("open"); document.body.style.overflow = ""; if (lastFocus) lastFocus.focus(); }
-  function lbStep(d){ lbI = (lbI + d + lbSet.length) % lbSet.length; lbShow(); }
-  lb.querySelector(".x").onclick = lbClose; lb.querySelector(".lp").onclick = function(){ lbStep(-1); }; lb.querySelector(".ln").onclick = function(){ lbStep(1); };
-  lb.addEventListener("click", function(e){ if (e.target === lb) lbClose(); });
-  document.addEventListener("keydown", function(e){ if (!lb.classList.contains("open")) return; if (e.key === "Escape") lbClose(); if (e.key === "ArrowLeft") lbStep(-1); if (e.key === "ArrowRight") lbStep(1); });
+  // Lightbox (homepage). Missing on pages that ship their own viewer.
+  var lb = document.getElementById("lightbox");
+  var lbOpen = function(){};
+  if (lb) {
+    var lbImg = lb.querySelector("img"), lbCap = lb.querySelector("p"), lbSet = [], lbI = 0, lastFocus;
+    function lbShow(){ var it = lbSet[lbI]; var alt = typeof it.alt === "function" ? it.alt() : (it.alt || ""); lbImg.src = it.src; lbImg.alt = alt; lbCap.textContent = alt; var m = lbSet.length > 1; lb.querySelector(".lp").hidden = !m; lb.querySelector(".ln").hidden = !m; }
+    lbOpen = function(set, i){ lbSet = set; lbI = i; lastFocus = document.activeElement; lbShow(); lb.classList.add("open"); document.body.style.overflow = "hidden"; lb.querySelector(".x").focus(); };
+    function lbClose(){ lb.classList.remove("open"); document.body.style.overflow = ""; if (lastFocus) lastFocus.focus(); }
+    function lbStep(d){ lbI = (lbI + d + lbSet.length) % lbSet.length; lbShow(); }
+    lb.querySelector(".x").onclick = lbClose; lb.querySelector(".lp").onclick = function(){ lbStep(-1); }; lb.querySelector(".ln").onclick = function(){ lbStep(1); };
+    lb.addEventListener("click", function(e){ if (e.target === lb) lbClose(); });
+    document.addEventListener("keydown", function(e){ if (!lb.classList.contains("open")) return; if (e.key === "Escape") lbClose(); if (e.key === "ArrowLeft") lbStep(-1); if (e.key === "ArrowRight") lbStep(1); });
+  }
 
   // Project galleries (images listed in data-images JSON). Empty list keeps the illustrated placeholder.
   function esc(s){ var d = document.createElement("div"); d.textContent = s || ""; return d.innerHTML; }
@@ -141,5 +292,6 @@
     if (/[?&]sent=1/.test(location.search)) document.getElementById("thanks").classList.add("show");
   }
 
+  window.Portfolio = { onLang: function(fn){ langListeners.push(fn); } };
   applyLang(isAr() ? "ar" : "en", false);
 })();

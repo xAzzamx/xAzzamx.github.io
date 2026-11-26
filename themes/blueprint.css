@@ -1,0 +1,69 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap");
+/* Blueprint: technical sheet, registration marks, mono labels, framed panels. */
+html[data-style="blueprint"]{color-scheme:dark;--bg:#0a3f86;--paper:rgba(6,36,90,.35);--paper2:rgba(6,36,90,.2);--line:rgba(190,220,255,.7);--line2:rgba(190,220,255,.85);--ink:#e7f3ff;--ink2:#d5e8ff;--mut:#b7d2f5;--dim:#8fb4e0;--clay:#f5d76e;--clay-d:#f5d76e;--clay-l:rgba(245,215,110,.15);--sage:#7CFFCB;--sage-d:#d8fff2;--sage-l:rgba(124,255,203,.12);--olive:#0a3f86;--sand:rgba(255,255,255,.08);--mustard:#f5d76e;--mustard-l:rgba(245,215,110,.12);--r:0px;--shadow:none;--shadow-h:none;--sans:"IBM Plex Sans",ui-sans-serif,system-ui,sans-serif;--serif:"IBM Plex Sans",ui-sans-serif,system-ui,sans-serif}
+html[data-style="blueprint"] body{background-color:#0a3f86;color:#e7f3ff;font-family:"IBM Plex Sans",ui-sans-serif,system-ui,sans-serif;background-image:linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px);background-size:28px 28px;animation:blueDrift 24s linear infinite}
+@keyframes blueDrift{from{background-position:0 0,0 0}to{background-position:0 28px,28px 0}}
+html[data-style="blueprint"][lang=ar] body{font-family:var(--ar),"IBM Plex Sans",sans-serif}
+html[data-style="blueprint"][lang=ar] h1,html[data-style="blueprint"][lang=ar] h2,html[data-style="blueprint"][lang=ar] h3{font-family:var(--ar-head)}
+html[data-style="blueprint"] body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:2;background:linear-gradient(#d7e8ff,#d7e8ff) left 12px top 12px / 16px 1px no-repeat,linear-gradient(#d7e8ff,#d7e8ff) left 12px top 12px / 1px 16px no-repeat,linear-gradient(#d7e8ff,#d7e8ff) right 12px top 12px / 16px 1px no-repeat,linear-gradient(#d7e8ff,#d7e8ff) right 12px top 12px / 1px 16px no-repeat,linear-gradient(#d7e8ff,#d7e8ff) left 12px bottom 12px / 16px 1px no-repeat,linear-gradient(#d7e8ff,#d7e8ff) left 12px bottom 12px / 1px 16px no-repeat,linear-gradient(#d7e8ff,#d7e8ff) right 12px bottom 12px / 16px 1px no-repeat,linear-gradient(#d7e8ff,#d7e8ff) right 12px bottom 12px / 1px 16px no-repeat}
+html[data-style="blueprint"] body::after{display:none}
+html[data-style="blueprint"] ::selection{background:#f5d76e;color:#0a3f86}
+html[data-style="blueprint"] a{color:#f5d76e}
+html[data-style="blueprint"] .nav .bar{border-radius:0;background:rgba(8,40,110,.82);border:1px solid rgba(190,220,255,.75);box-shadow:none}
+html[data-style="blueprint"] .brand{font-family:"IBM Plex Mono",ui-monospace,monospace;letter-spacing:.04em}
+html[data-style="blueprint"] .mark{border-radius:0;transform:none;background:transparent;color:#f5d76e;border:1px solid #f5d76e}
+html[data-style="blueprint"] .brand:hover .mark{transform:none}
+html[data-style="blueprint"] .nav ul a{color:#d5e8ff;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.78rem;letter-spacing:.06em}
+html[data-style="blueprint"] .nav ul a:hover{background:rgba(255,255,255,.08);color:#fff}
+html[data-style="blueprint"] .lang-btn{border-radius:0;background:#f5d76e;color:#0a3f86;border-color:#f5d76e}
+html[data-style="blueprint"] .style-btn,html[data-style="blueprint"] .style-menu{border-radius:0;background:rgba(8,40,110,.95);color:#e7f3ff;border-color:rgba(190,220,255,.75);box-shadow:none}
+html[data-style="blueprint"] .style-menu li[aria-selected="true"],html[data-style="blueprint"] .style-menu li:hover{background:rgba(245,215,110,.16);color:#f5d76e}
+html[data-style="blueprint"] .sx{border-radius:0;background:transparent;color:#f5d76e;border:1px solid #f5d76e}
+html[data-style="blueprint"] .menu-btn{border-radius:0;background:transparent;border-color:rgba(190,220,255,.75)}
+html[data-style="blueprint"] .menu-btn span{background:#e7f3ff}
+html[data-style="blueprint"] .hero{grid-column:1 / -1;grid-row:auto;background:transparent;background-image:none;border-style:dashed}
+html[data-style="blueprint"] .hero::after{content:"REV 06  /  SHEET 01";position:absolute;top:18px;inset-inline-end:18px;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.72rem;letter-spacing:.14em;color:#f5d76e;border:1px dashed #f5d76e;padding:6px 8px}
+html[data-style="blueprint"] .project{grid-column:1 / -1}
+html[data-style="blueprint"] .tile{background:rgba(6,36,90,.28);border:1px solid rgba(190,220,255,.7);border-radius:0;box-shadow:none;color:#e7f3ff}
+html[data-style="blueprint"] .tile:hover,html[data-style="blueprint"] .reveal.in:hover{transform:none;border-color:#f5d76e;box-shadow:none}
+html[data-style="blueprint"] .blob,html[data-style="blueprint"] .spark{display:none}
+html[data-style="blueprint"] .squiggle{color:#f5d76e}
+html[data-style="blueprint"] .label{font-family:"IBM Plex Mono",ui-monospace,monospace;letter-spacing:.14em;color:#f5d76e}
+html[data-style="blueprint"] .label svg{border-radius:0;background:transparent;color:#f5d76e;border:1px solid rgba(245,215,110,.7)}
+html[data-style="blueprint"] .hello{font-family:"IBM Plex Mono",ui-monospace,monospace;font-style:normal;color:#7CFFCB}
+html[data-style="blueprint"] .hero h1{letter-spacing:-.03em}
+html[data-style="blueprint"] .offer,.html[data-style="blueprint"] .research,html[data-style="blueprint"] .offer,html[data-style="blueprint"] .research,html[data-style="blueprint"] .focus,html[data-style="blueprint"] .certs,html[data-style="blueprint"] .contact,html[data-style="blueprint"] .step,html[data-style="blueprint"] .li-tile{background:rgba(6,36,90,.28);background-image:none;color:#e7f3ff;border-color:rgba(190,220,255,.7)}
+html[data-style="blueprint"] .step .big,html[data-style="blueprint"] .step .label,html[data-style="blueprint"] .step .sub,html[data-style="blueprint"] .big,html[data-style="blueprint"] .research .big,html[data-style="blueprint"] .stat b,html[data-style="blueprint"] .li-tile,html[data-style="blueprint"] .li-tile small{color:#e7f3ff}
+html[data-style="blueprint"] .big,html[data-style="blueprint"] .stat b,html[data-style="blueprint"] .research .big{color:#f5d76e;font-family:"IBM Plex Mono",ui-monospace,monospace}
+html[data-style="blueprint"] .btn{border-radius:0;border-color:#e7f3ff;color:#e7f3ff}
+html[data-style="blueprint"] .btn:hover{background:#e7f3ff;color:#0a3f86}
+html[data-style="blueprint"] .btn.primary{background:#f5d76e;border-color:#f5d76e;color:#0a3f86;box-shadow:none}
+html[data-style="blueprint"] .btn.primary:hover{background:#fff;border-color:#fff;color:#0a3f86;box-shadow:none}
+html[data-style="blueprint"] .pill,.html[data-style="blueprint"] .chip,html[data-style="blueprint"] .stat,html[data-style="blueprint"] .pill,html[data-style="blueprint"] .chip,html[data-style="blueprint"] .stat{border-radius:0;background:transparent;border-color:rgba(190,220,255,.55);color:#e7f3ff}
+html[data-style="blueprint"] .pill.a,html[data-style="blueprint"] .pill.t{color:#f5d76e;background:transparent;border-color:#f5d76e}
+html[data-style="blueprint"] .link-tile .ico{border-radius:0;background:transparent;border:1px solid rgba(190,220,255,.6);color:#f5d76e}
+html[data-style="blueprint"] .link-tile .go{border-radius:0;border-color:rgba(190,220,255,.6);color:#e7f3ff}
+html[data-style="blueprint"] p,html[data-style="blueprint"] .lead{color:#d5e8ff}
+html[data-style="blueprint"] details.cw{border-radius:0;background:transparent;border-color:rgba(190,220,255,.45)}
+html[data-style="blueprint"] details.cw[open]{background:rgba(255,255,255,.04)}
+html[data-style="blueprint"] details.cw summary{color:#e7f3ff}
+html[data-style="blueprint"] input,html[data-style="blueprint"] textarea{border-radius:0;background:rgba(4,24,70,.65);border-color:rgba(190,220,255,.7);color:#e7f3ff}
+html[data-style="blueprint"] .slide .img{border-radius:0;transform:none;border-color:rgba(190,220,255,.7);box-shadow:none}
+html[data-style="blueprint"] .all-certs{border-radius:0;border-color:#f5d76e;color:#f5d76e}
+html[data-style="blueprint"] .all-certs:hover{background:#f5d76e;color:#0a3f86}
+html[data-style="blueprint"] .arrow{border-radius:0;border-color:#e7f3ff;color:#e7f3ff}
+html[data-style="blueprint"] footer{color:#b7d2f5}
+html[data-style="blueprint"] .lb{background:rgba(4,20,60,.9)}
+html[data-style="blueprint"] .cert-card,html[data-style="blueprint"] .cf-card,html[data-style="blueprint"] .cert-intro{background:rgba(6,36,90,.45);color:#e7f3ff;border:1px solid rgba(190,220,255,.7);border-radius:0;box-shadow:none}
+html[data-style="blueprint"] .cf-card.is-active{border-color:#f5d76e}
+html[data-style="blueprint"] .cert-card h3,html[data-style="blueprint"] .cf-card h3,html[data-style="blueprint"] .cert-group h2{color:#e7f3ff}
+html[data-style="blueprint"] .cert-filters button{border-radius:0;background:transparent;color:#e7f3ff;border-color:rgba(190,220,255,.7)}
+html[data-style="blueprint"] .cert-filters button[aria-pressed="true"]{background:#f5d76e;color:#0a3f86;border-color:#f5d76e}
+html[data-style="blueprint"] .cert-count,html[data-style="blueprint"] .cf-count{color:#f5d76e}
+html[data-style="blueprint"] .cert-card:hover{transform:none}
+html[data-style="blueprint"] .nav ul{border-radius:0;background:#0a3f86;border-color:rgba(190,220,255,.7)}
+html[data-style="blueprint"] .nav a[aria-current="page"]{background:rgba(245,215,110,.16);color:#f5d76e}
+@media (max-width:680px){
+ html[data-style="blueprint"] .hero{padding-bottom:64px}
+ html[data-style="blueprint"] .hero::after{top:auto;bottom:14px;font-size:.62rem;letter-spacing:.08em}
+}
