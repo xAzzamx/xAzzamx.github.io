@@ -50,7 +50,7 @@
   // Style switcher. Classic is the absence of data-style, so the current design stays untouched.
   var STYLE_OK = {classic:1, terminal:1, aurora:1, brutal:1, synth:1, editorial:1, blueprint:1, bento:1, win95:1, room:1, manga:1, aero:1, clay:1, film:1};
   var THEME_JS = {terminal:1, aurora:1, brutal:1, synth:1, editorial:1, blueprint:1, bento:1, win95:1, room:1, manga:1, aero:1, clay:1, film:1};
-  var ASSET = "v=20261130";
+  var ASSET = "v=20261201";
   var BOOT_BG = {
     terminal:{light:"#f0f8f1",dark:"#061308"},
     aurora:{light:"#e5eaff",dark:"#100e24"},

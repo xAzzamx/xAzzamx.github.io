@@ -11,8 +11,14 @@ ThemeEngine.register("film", function(root){
     f.addEventListener("click", function(){ expand(title, body); });
     frames.push(f);
   }
+  function shot(src){ var im = E.h("img", "shot"); im.src = src; im.alt = ""; return im; }
   if (E.page === "certs"){
-    add("00", E.isAr() ? "العودة" : "Return", function(box){ box.appendChild(E.backLink()); box.appendChild(E.h("p", "", String(E.count()))); });
+    add("00", E.isAr() ? "العودة" : "Return", function(box){
+      var thumbs = (window.CERT_CATALOG || []).slice(0, 3);
+      if (thumbs[0]) box.appendChild(shot(thumbs[0].thumb));
+      box.appendChild(E.backLink());
+      box.appendChild(E.h("p", "", String(E.count())));
+    });
     E.groups("field").forEach(function(g, i){
       add(String(i + 1).padStart(2, "0"), E.t(g), function(box){
         var rail = E.h("div", "film-rail");
@@ -35,9 +41,16 @@ ThemeEngine.register("film", function(root){
       S.msc.pills.forEach(function(p){ box.appendChild(E.h("p", "", E.t(p))); });
     });
     S.projects.forEach(function(p, i){
-      add(String(i + 3).padStart(2, "0"), E.t(p.title), function(box){ box.appendChild(E.h("p", "", E.t(p.body))); });
+      add(String(i + 3).padStart(2, "0"), E.t(p.title), function(box){
+        if (p.img) box.appendChild(shot(p.img));
+        box.appendChild(E.h("p", "", E.t(p.body)));
+      });
     });
     add("06", E.isAr() ? "الشهادات" : "Certificates", function(box){
+      var thumbs = (window.CERT_CATALOG || []).slice(0, 4);
+      var row = E.h("div", "film-rail");
+      thumbs.forEach(function(item){ row.appendChild(shot(item.thumb)); });
+      box.appendChild(row);
       box.appendChild(E.h("p", "", String(E.count())));
       var a = E.h("a", ""); a.href = "certificates.html"; a.appendChild(E.bi("Open the reel", "افتح الشريط"));
       box.appendChild(a);
