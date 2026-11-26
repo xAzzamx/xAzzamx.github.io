@@ -50,7 +50,7 @@
   // Style switcher. Classic is the absence of data-style, so the current design stays untouched.
   var STYLE_OK = {classic:1, terminal:1, aurora:1, brutal:1, synth:1, editorial:1, blueprint:1, bento:1};
   var THEME_JS = {terminal:1, aurora:1, brutal:1, synth:1, editorial:1, blueprint:1, bento:1};
-  var ASSET = "v=20261128";
+  var ASSET = "v=20261129";
   var BOOT_BG = {
     terminal:{light:"#f0f8f1",dark:"#061308"},
     aurora:{light:"#e5eaff",dark:"#100e24"},
@@ -110,6 +110,7 @@
     if (!THEME_JS[id]) return;
     var gen = ++themeLoadGen;
     var urls = ["themes/fields.js","themes/content.js","themes/engine.js","themes/" + id + ".js"];
+    if (!window.CERT_CATALOG) urls.unshift("certs/catalog.js");
     function step(i){
       if (gen !== themeLoadGen) return;
       if (i >= urls.length) return;

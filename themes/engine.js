@@ -29,6 +29,16 @@
     return window.CertFields.group(cat, mode || "field");
   };
   E.count = function(){ return (window.CERT_CATALOG || []).length; };
+  E.portfolioHref = function(){
+    var s = document.documentElement.getAttribute("data-style");
+    return s ? "index.html?style=" + encodeURIComponent(s) : "index.html";
+  };
+  E.backLink = function(extra){
+    var a = E.h("a", "back-port" + (extra ? " " + extra : ""));
+    a.href = E.portfolioHref();
+    a.appendChild(E.bi("Back to portfolio", "العودة إلى الملف الشخصي"));
+    return a;
+  };
   E.certsHref = function(hash){
     var base = E.page === "certs" ? "certificates.html" : "certificates.html";
     return hash ? base + hash : base;

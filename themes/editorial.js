@@ -7,8 +7,7 @@ ThemeEngine.register("editorial", function(root){
   root.appendChild(mast);
   if (E.page === "certs"){
     root.appendChild(E.h("h2", "", E.isAr() ? "فهرس الشهادات" : "Certificate index"));
-    var back = E.h("a", ""); back.href = "index.html"; back.appendChild(E.bi("Return to the issue", "العودة إلى العدد"));
-    root.appendChild(back);
+    root.appendChild(E.backLink());
     E.rails(root, {rowClass:"ed-row", railClass:"ed-rail", cardClass:"ed-card"});
     return;
   }

@@ -18,6 +18,7 @@ ThemeEngine.register("bento", function(root){
   var main = E.h("div", "bn-main");
   if (E.page === "certs"){
     main.appendChild(E.h("h1", "", E.isAr() ? "لوحة الشهادات" : "Certificate dashboard"));
+    main.appendChild(E.backLink("bn-go"));
     main.appendChild(E.h("p", "", String(E.count())));
     E.rails(main, {rowClass:"bn-row", railClass:"bn-railx", cardClass:"bn-card"});
     app.appendChild(rail); app.appendChild(main); root.appendChild(app);
@@ -25,7 +26,7 @@ ThemeEngine.register("bento", function(root){
   }
   var kpis = E.h("section", "bn-kpis");
   kpis.id = "bn-kpis";
-  [[S.step.n, E.t(S.step)], ["2027", E.t(S.msc)], [String(S.projects.length), E.isAr() ? "مشاريع" : "Projects"], [String(E.count()), E.isAr() ? "شهادة" : "Certificates"]].forEach(function(k){
+  [[S.step.n, E.t(S.step)], [E.isAr() ? "خطة" : "Plan", E.t(S.msc)], [String(S.projects.length), E.isAr() ? "مشاريع" : "Projects"], [String(E.count()), E.isAr() ? "شهادة" : "Certificates"]].forEach(function(k){
     var c = E.h("article", "bn-kpi");
     c.appendChild(E.h("b", "", k[0]));
     c.appendChild(E.h("span", "", k[1]));

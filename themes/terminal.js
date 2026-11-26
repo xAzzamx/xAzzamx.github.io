@@ -38,6 +38,7 @@ ThemeEngine.register("terminal", function(root){
       out.appendChild(line(E.t(S.role)));
       out.appendChild(line(E.t(S.lead)));
       out.appendChild(line(E.t(S.status) + "  |  STEP " + S.step.n));
+      out.appendChild(line((E.isAr() ? "الشهادات " : "certificates ") + E.count()));
     } else if (cmd === "about"){
       out.appendChild(E.h("h2", "", E.t(S.aboutTitle)));
       S.about.forEach(function(p){ out.appendChild(line(E.t(p))); });
@@ -67,6 +68,7 @@ ThemeEngine.register("terminal", function(root){
         out.appendChild(line(g.items.join("   ")));
       });
     } else if (cmd === "certificates"){
+      if (E.page === "certs") out.appendChild(E.backLink("term-go"));
       out.appendChild(line((E.isAr() ? "عدد الشهادات " : "certificates ") + E.count()));
       var link = E.h("a", "term-go");
       link.href = "certificates.html";

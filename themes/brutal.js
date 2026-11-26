@@ -3,8 +3,7 @@ ThemeEngine.register("brutal", function(root){
   var grid = E.h("div", "bru");
   if (E.page === "certs"){
     grid.appendChild(E.h("h1", "bru-title", E.isAr() ? "ملصقات الشهادات" : "CERTIFICATE POSTERS"));
-    var back = E.h("a", "bru-btn"); back.href = "index.html"; back.appendChild(E.bi("Back", "رجوع"));
-    grid.appendChild(back);
+    grid.appendChild(E.backLink("bru-btn"));
     E.rails(grid, {rowClass:"bru-row", railClass:"bru-rail", cardClass:"bru-card"});
     root.appendChild(grid);
     return;
