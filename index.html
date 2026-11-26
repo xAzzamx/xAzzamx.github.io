@@ -5,6 +5,38 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Azzam Alzahrani | Computer Science Graduate, Cybersecurity and AI</title>
 <script>(function(){try{var h=document.documentElement;var l=localStorage.getItem("lang");if(l==="ar"){h.lang="ar";h.dir="rtl";}var mode=localStorage.getItem("color");if(mode!=="light"&&mode!=="dark"){mode=(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light";}h.setAttribute("data-mode",mode);var ok={terminal:1,aurora:1,brutal:1,synth:1,editorial:1,blueprint:1,bento:1,win95:1,room:1,manga:1,aero:1,clay:1,film:1};var s=localStorage.getItem("style");var m=/[?&]style=(classic|terminal|aurora|brutal|synth|editorial|blueprint|bento|win95|room|manga|aero|clay|film)(?:&|$)/.exec(location.search);if(m){s=m[1];try{localStorage.setItem("style",s);}catch(e){}}if(s&&ok[s])h.setAttribute("data-style",s);}catch(e){}})();</script>
+<script>(function(){
+  var root = document.documentElement;
+  try {
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!reduce && window.IntersectionObserver) root.classList.add("can-reveal");
+  } catch (e) {}
+  function seenEnough(el, h) {
+    var r = el.getBoundingClientRect();
+    if (r.width <= 0 || r.height <= 0) return false;
+    var vis = Math.min(r.bottom, h - 40) - Math.max(r.top, 0);
+    return vis > 0 && vis / r.height >= 0.08;
+  }
+  function rescue() {
+    if (!root.classList.contains("can-reveal")) return;
+    var nodes = document.querySelectorAll(".reveal");
+    var h = window.innerHeight || root.clientHeight || 0;
+    var i;
+    for (i = 0; i < nodes.length; i++) {
+      if (nodes[i].classList.contains("in")) continue;
+      if (seenEnough(nodes[i], h)) { root.classList.remove("can-reveal"); return; }
+    }
+  }
+  var scrollTimer;
+  window.addEventListener("scroll", function () {
+    if (!root.classList.contains("can-reveal")) return;
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(rescue, 400);
+  });
+  function arm() { setTimeout(rescue, 700); }
+  if (document.readyState === "complete") arm();
+  else window.addEventListener("load", arm);
+})();</script>
 <meta name="description" content="Portfolio of Azzam Mohammed Alzahrani, Computer Science graduate focused on cybersecurity and artificial intelligence.">
 <meta name="theme-color" content="#f5eee3">
 <meta property="og:title" content="Azzam Alzahrani | Cybersecurity and AI">
@@ -14,7 +46,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Readex+Pro:wght@500;600;700&display=swap">
-<link rel="stylesheet" href="style.css?v=20261201">
+<link rel="stylesheet" href="style.css?v=20261202">
 <script>(function(){var s=document.documentElement.getAttribute("data-style");if(!s)return;var bg={terminal:{light:"#f0f8f1",dark:"#061308"},aurora:{light:"#e5eaff",dark:"#100e24"},brutal:{light:"#f9f5e6",dark:"#13120c"},synth:{light:"#fbf2fb",dark:"#17091a"},editorial:{light:"#f8f1e5",dark:"#18100a"},blueprint:{light:"#ebf3fc",dark:"#0e2440"},bento:{light:"#f1f6fa",dark:"#0d1218"},win95:{light:"#008080",dark:"#0d3333"},room:{light:"#f4efe6",dark:"#1a140f"},manga:{light:"#f7f4ea",dark:"#141414"},aero:{light:"#c5e8f8",dark:"#1a2744"},clay:{light:"#f6efe6",dark:"#2a1c18"},film:{light:"#efe8dc",dark:"#0e0e0e"}};var mode=document.documentElement.getAttribute("data-mode")==="dark"?"dark":"light";var c=(bg[s]&&bg[s][mode])||"#111";var st=document.createElement("style");st.id="theme-boot";st.textContent='html[data-style="'+s+'"] body{background:'+c+'}html[data-style] main,html[data-style] footer,html[data-style] #menu,html[data-style] .menu-btn{display:none!important}';document.head.appendChild(st);var l=document.createElement("link");l.rel="stylesheet";l.id="theme-css";l.href="themes/"+s+".css?v=20261201";document.head.appendChild(l);})();</script>
 </head>
 <body>
@@ -224,7 +256,7 @@
 <button class="ln" type="button" aria-label="Next image">&#8250;</button>
 <p></p>
 </div>
-<script src="main.js?v=20261201"></script>
+<script src="main.js?v=20261202"></script>
 <script data-goatcounter="https://xazzamx.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

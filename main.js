@@ -212,11 +212,19 @@
   }
   if (styleBtn && styleMenu){
     var touchToggle = false;
-    styleBtn.addEventListener("touchend", function(e){
-      e.preventDefault();
-      touchToggle = true;
-      toggleStyleMenu(false);
-    }, {passive:false});
+    try {
+      styleBtn.addEventListener("touchend", function(e){
+        e.preventDefault();
+        touchToggle = true;
+        toggleStyleMenu(false);
+      }, {passive:false});
+    } catch (err) {
+      styleBtn.addEventListener("touchend", function(e){
+        e.preventDefault();
+        touchToggle = true;
+        toggleStyleMenu(false);
+      });
+    }
     styleBtn.addEventListener("click", function(e){
       if (touchToggle){ touchToggle = false; e.preventDefault(); return; }
       toggleStyleMenu(false);
@@ -224,12 +232,21 @@
     styleBtn.addEventListener("keydown", function(e){
       if (e.key === "ArrowDown" || e.key === "ArrowUp"){ e.preventDefault(); openStyleMenu(true); }
     });
-    styleMenu.addEventListener("touchend", function(e){
-      var li = optionFrom(e.target);
-      if (!li) return;
-      e.preventDefault();
-      chooseStyle(li);
-    }, {passive:false});
+    try {
+      styleMenu.addEventListener("touchend", function(e){
+        var li = optionFrom(e.target);
+        if (!li) return;
+        e.preventDefault();
+        chooseStyle(li);
+      }, {passive:false});
+    } catch (err) {
+      styleMenu.addEventListener("touchend", function(e){
+        var li = optionFrom(e.target);
+        if (!li) return;
+        e.preventDefault();
+        chooseStyle(li);
+      });
+    }
     styleMenu.addEventListener("click", function(e){
       var li = optionFrom(e.target);
       if (!li) return;
@@ -264,15 +281,36 @@
     if (initial !== "classic") loadThemeJs(initial);
   }
 
-  // Reveal on scroll with a gentle stagger
+  // Reveal on scroll with a gentle stagger.
+  // If IntersectionObserver is missing or throws (some TV browsers), show every section.
   var els = [].slice.call(document.querySelectorAll(".reveal"));
+  function showReveals(){
+    var i;
+    for (i = 0; i < els.length; i++) els[i].classList.add("in");
+  }
   if ("IntersectionObserver" in window && !reduce) {
-    var io = new IntersectionObserver(function(es){
-      var k = 0;
-      es.forEach(function(e){ if (e.isIntersecting){ var el = e.target; el.style.transitionDelay = (k++ % 4) * 80 + "ms"; el.classList.add("in"); setTimeout(function(){ el.style.transitionDelay = ""; }, 1200); io.unobserve(el); } });
-    }, {threshold: .08, rootMargin: "0px 0px -40px 0px"});
-    els.forEach(function(el){ io.observe(el); });
-  } else els.forEach(function(el){ el.classList.add("in"); });
+    try {
+      var io = new IntersectionObserver(function(es){
+        var k = 0;
+        var list = es || [];
+        var j;
+        for (j = 0; j < list.length; j++) {
+          var e = list[j];
+          if (!e || !e.isIntersecting) continue;
+          (function(el, delay){
+            el.style.transitionDelay = delay + "ms";
+            el.classList.add("in");
+            setTimeout(function(){ el.style.transitionDelay = ""; }, 1200);
+            io.unobserve(el);
+          })(e.target, (k++ % 4) * 80);
+        }
+      }, {threshold: .08, rootMargin: "0px 0px -40px 0px"});
+      var ri;
+      for (ri = 0; ri < els.length; ri++) io.observe(els[ri]);
+    } catch (err) {
+      showReveals();
+    }
+  } else showReveals();
 
   // Lightbox (homepage). Missing on pages that ship their own viewer.
   var lb = document.getElementById("lightbox");
